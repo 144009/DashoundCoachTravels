@@ -1,0 +1,765 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="C__MigrationHistory" EntityType="Model.Store.C__MigrationHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetRoles" EntityType="Model.Store.AspNetRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Model.Store.AspNetUserClaims" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Model.Store.AspNetUserLogins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUsers" EntityType="Model.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="Model.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Trips" EntityType="Model.Store.Trips" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Trips_Locations" EntityType="Model.Store.Trips_Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Coaches" EntityType="Model.Store.Coaches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reservations" EntityType="Model.Store.Reservations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetRoleUsers" EntityType="Model.Store.AspNetRoleUsers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Model.Store.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Model.Store.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="LocationsTrips_Locations" Association="Model.Store.LocationsTrips_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Trips_Locations" EntitySet="Trips_Locations" />
+    </AssociationSet>
+    <AssociationSet Name="TripsTrips_Locations" Association="Model.Store.TripsTrips_Locations">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="Trips_Locations" EntitySet="Trips_Locations" />
+    </AssociationSet>
+    <AssociationSet Name="CoachesTrips" Association="Model.Store.CoachesTrips">
+      <End Role="Coaches" EntitySet="Coaches" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="TripsReservations" Association="Model.Store.TripsReservations">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="ReservationsAspNetUser" Association="Model.Store.ReservationsAspNetUser">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetRoleUsersAspNetUser" Association="Model.Store.AspNetRoleUsersAspNetUser">
+      <End Role="AspNetRoleUsers" EntitySet="AspNetRoleUsers" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetRoleUsersAspNetRole" Association="Model.Store.AspNetRoleUsersAspNetRole">
+      <End Role="AspNetRoleUsers" EntitySet="AspNetRoleUsers" />
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="ContextKey" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ClaimType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ProviderKey" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" Nullable="true" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Town" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumHouse" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumFlat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ZIPCode" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Town" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateDeparture" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateBack" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SpotsAvaliable" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BannerBig" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BannerSmall" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CoachType" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trips_Locations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location_Id" Type="int" Nullable="false" />
+    <Property Name="Trip_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coaches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Seats" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateAdded" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VehicleNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Trips_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateBooked" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NumPeople" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatePayedAdvance" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DatePayedFull" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Advance" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Trip_Id" Type="int" Nullable="false" />
+    <Property Name="AspNetUsers_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoleUsers">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AspNetUsers_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AspNetRoles_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Model.Store.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Model.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Model.Store.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LocationsTrips_Locations">
+    <End Role="Locations" Type="Model.Store.Locations" Multiplicity="1" />
+    <End Role="Trips_Locations" Type="Model.Store.Trips_Locations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Trips_Locations">
+        <PropertyRef Name="Location_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TripsTrips_Locations">
+    <End Role="Trips" Type="Model.Store.Trips" Multiplicity="1" />
+    <End Role="Trips_Locations" Type="Model.Store.Trips_Locations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Trips_Locations">
+        <PropertyRef Name="Trip_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoachesTrips">
+    <End Role="Coaches" Type="Model.Store.Coaches" Multiplicity="*" />
+    <End Role="Trips" Type="Model.Store.Trips" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Coaches">
+        <PropertyRef Name="Trips_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TripsReservations">
+    <End Role="Trips" Type="Model.Store.Trips" Multiplicity="1" />
+    <End Role="Reservations" Type="Model.Store.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="Trip_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ReservationsAspNetUser">
+    <End Role="Reservations" Type="Model.Store.Reservations" Multiplicity="*" />
+    <End Role="AspNetUser" Type="Model.Store.AspNetUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="AspNetUsers_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetRoleUsersAspNetUser">
+    <End Role="AspNetRoleUsers" Type="Model.Store.AspNetRoleUsers" Multiplicity="*" />
+    <End Role="AspNetUser" Type="Model.Store.AspNetUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetRoleUsers">
+        <PropertyRef Name="AspNetUsers_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetRoleUsersAspNetRole">
+    <End Role="AspNetRoleUsers" Type="Model.Store.AspNetRoleUsers" Multiplicity="*" />
+    <End Role="AspNetRole" Type="Model.Store.AspNetRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetRoleUsers">
+        <PropertyRef Name="AspNetRoles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRoleUser" Relationship="Model.AspNetRoleUsersAspNetRole" FromRole="AspNetRole" ToRole="AspNetRoleUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Reservation" Relationship="Model.ReservationsAspNetUser" FromRole="AspNetUser" ToRole="Reservations" />
+          <NavigationProperty Name="AspNetRoleUser" Relationship="Model.AspNetRoleUsersAspNetUser" FromRole="AspNetUser" ToRole="AspNetRoleUsers" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Surname" Type="String" Nullable="false" />
+          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="Town" Type="String" Nullable="false" />
+          <Property Name="Street" Type="String" Nullable="false" />
+          <Property Name="NumHouse" Type="String" Nullable="false" />
+          <Property Name="NumFlat" Type="String" Nullable="false" />
+          <Property Name="ZIPCode" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <EntitySet Name="Locations" EntityType="Model.Locations" />
+          <EntitySet Name="Trips" EntityType="Model.Trips" />
+          <EntitySet Name="Trips_Locations" EntityType="Model.Trips_Locations" />
+          <AssociationSet Name="LocationsTrips_Locations" Association="Model.LocationsTrips_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Trips_Locations" EntitySet="Trips_Locations" />
+          </AssociationSet>
+          <AssociationSet Name="TripsTrips_Locations" Association="Model.TripsTrips_Locations">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Trips_Locations" EntitySet="Trips_Locations" />
+          </AssociationSet>
+          <EntitySet Name="Coaches" EntityType="Model.Coaches" />
+          <AssociationSet Name="CoachesTrips" Association="Model.CoachesTrips">
+            <End Role="Coaches" EntitySet="Coaches" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <EntitySet Name="Reservations" EntityType="Model.Reservations" />
+          <AssociationSet Name="TripsReservations" Association="Model.TripsReservations">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="ReservationsAspNetUser" Association="Model.ReservationsAspNetUser">
+            <End Role="Reservations" EntitySet="Reservations" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoleUsers" EntityType="Model.AspNetRoleUsers" />
+          <AssociationSet Name="AspNetRoleUsersAspNetUser" Association="Model.AspNetRoleUsersAspNetUser">
+            <End Role="AspNetRoleUsers" EntitySet="AspNetRoleUsers" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetRoleUsersAspNetRole" Association="Model.AspNetRoleUsersAspNetRole">
+            <End Role="AspNetRoleUsers" EntitySet="AspNetRoleUsers" />
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" Nullable="false" />
+          <Property Name="Town" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Trips_Locations" Relationship="Model.LocationsTrips_Locations" FromRole="Locations" ToRole="Trips_Locations" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="DateDeparture" Type="String" Nullable="false" />
+          <Property Name="DateBack" Type="String" Nullable="false" />
+          <Property Name="SpotsAvaliable" Type="String" Nullable="false" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="BannerBig" Type="String" Nullable="false" />
+          <Property Name="BannerSmall" Type="String" Nullable="false" />
+          <Property Name="CoachType" Type="String" Nullable="false" />
+          <NavigationProperty Name="Trips_Locations" Relationship="Model.TripsTrips_Locations" FromRole="Trips" ToRole="Trips_Locations" />
+          <NavigationProperty Name="Coach" Relationship="Model.CoachesTrips" FromRole="Trips" ToRole="Coaches" />
+          <NavigationProperty Name="Reservations" Relationship="Model.TripsReservations" FromRole="Trips" ToRole="Reservations" />
+        </EntityType>
+        <EntityType Name="Trips_Locations" >
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <NavigationProperty Name="Location" Relationship="Model.LocationsTrips_Locations" FromRole="Trips_Locations" ToRole="Locations" />
+          <NavigationProperty Name="Trip" Relationship="Model.TripsTrips_Locations" FromRole="Trips_Locations" ToRole="Trips" />
+          <Property Name="Id" Type="String" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="LocationsTrips_Locations">
+          <End Type="Model.Locations" Role="Locations" Multiplicity="1" />
+          <End Type="Model.Trips_Locations" Role="Trips_Locations" Multiplicity="*" />
+        </Association>
+        <Association Name="TripsTrips_Locations">
+          <End Type="Model.Trips" Role="Trips" Multiplicity="1" />
+          <End Type="Model.Trips_Locations" Role="Trips_Locations" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Coaches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="String" Nullable="false" />
+          <Property Name="Seats" Type="String" Nullable="false" />
+          <Property Name="DateAdded" Type="String" Nullable="false" />
+          <Property Name="VehicleNumber" Type="String" Nullable="false" />
+          <NavigationProperty Name="Trips" Relationship="Model.CoachesTrips" FromRole="Coaches" ToRole="Trips" />
+        </EntityType>
+        <Association Name="CoachesTrips">
+          <End Type="Model.Coaches" Role="Coaches" Multiplicity="*" />
+          <End Type="Model.Trips" Role="Trips" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateBooked" Type="String" Nullable="false" />
+          <Property Name="NumPeople" Type="String" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" />
+          <Property Name="DatePayedAdvance" Type="String" Nullable="false" />
+          <Property Name="DatePayedFull" Type="String" Nullable="false" />
+          <Property Name="Advance" Type="String" Nullable="false" />
+          <NavigationProperty Name="Trip" Relationship="Model.TripsReservations" FromRole="Reservations" ToRole="Trips" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.ReservationsAspNetUser" FromRole="Reservations" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="TripsReservations">
+          <End Type="Model.Trips" Role="Trips" Multiplicity="1" />
+          <End Type="Model.Reservations" Role="Reservations" Multiplicity="*" />
+        </Association>
+        <Association Name="ReservationsAspNetUser">
+          <End Type="Model.Reservations" Role="Reservations" Multiplicity="*" />
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+        </Association>
+        <EntityType Name="AspNetRoleUsers">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetRoleUsersAspNetUser" FromRole="AspNetRoleUsers" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetRoleUsersAspNetRole" FromRole="AspNetRoleUsers" ToRole="AspNetRole" />
+        </EntityType>
+        <Association Name="AspNetRoleUsersAspNetUser">
+          <End Type="Model.AspNetRoleUsers" Role="AspNetRoleUsers" Multiplicity="*" />
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+        </Association>
+        <Association Name="AspNetRoleUsersAspNetRole">
+          <End Type="Model.AspNetRoleUsers" Role="AspNetRoleUsers" Multiplicity="*" />
+          <End Type="Model.AspNetRole" Role="AspNetRole" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.C__MigrationHistory)">
+        <MappingFragment StoreEntitySet="C__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetRole)">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserClaim)">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserLogin)">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUser)">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="NumHouse" ColumnName="NumHouse" />
+          <ScalarProperty Name="NumFlat" ColumnName="NumFlat" />
+          <ScalarProperty Name="ZIPCode" ColumnName="ZIPCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Locations)">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Trips)">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateDeparture" ColumnName="DateDeparture" />
+          <ScalarProperty Name="DateBack" ColumnName="DateBack" />
+          <ScalarProperty Name="SpotsAvaliable" ColumnName="SpotsAvaliable" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BannerBig" ColumnName="BannerBig" />
+          <ScalarProperty Name="BannerSmall" ColumnName="BannerSmall" />
+          <ScalarProperty Name="CoachType" ColumnName="CoachType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips_Locations">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Trips_Locations)">
+        <MappingFragment StoreEntitySet="Trips_Locations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coaches">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Coaches)">
+        <MappingFragment StoreEntitySet="Coaches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Seats" ColumnName="Seats" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="VehicleNumber" ColumnName="VehicleNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Reservations)">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateBooked" ColumnName="DateBooked" />
+          <ScalarProperty Name="NumPeople" ColumnName="NumPeople" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DatePayedAdvance" ColumnName="DatePayedAdvance" />
+          <ScalarProperty Name="DatePayedFull" ColumnName="DatePayedFull" />
+          <ScalarProperty Name="Advance" ColumnName="Advance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoleUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetRoleUsers)">
+        <MappingFragment StoreEntitySet="AspNetRoleUsers">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LocationsTrips_Locations" TypeName="Model.LocationsTrips_Locations" StoreEntitySet="Trips_Locations">
+      <EndProperty Name="Locations">
+        <ScalarProperty Name="Id" ColumnName="Location_Id" />
+      </EndProperty>
+      <EndProperty Name="Trips_Locations">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TripsTrips_Locations" TypeName="Model.TripsTrips_Locations" StoreEntitySet="Trips_Locations">
+      <EndProperty Name="Trips">
+        <ScalarProperty Name="Id" ColumnName="Trip_Id" />
+      </EndProperty>
+      <EndProperty Name="Trips_Locations">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CoachesTrips" TypeName="Model.CoachesTrips" StoreEntitySet="Coaches">
+      <EndProperty Name="Trips">
+        <ScalarProperty Name="Id" ColumnName="Trips_Id" />
+      </EndProperty>
+      <EndProperty Name="Coaches">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TripsReservations" TypeName="Model.TripsReservations" StoreEntitySet="Reservations">
+      <EndProperty Name="Trips">
+        <ScalarProperty Name="Id" ColumnName="Trip_Id" />
+      </EndProperty>
+      <EndProperty Name="Reservations">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ReservationsAspNetUser" TypeName="Model.ReservationsAspNetUser" StoreEntitySet="Reservations">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
+      </EndProperty>
+      <EndProperty Name="Reservations">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AspNetRoleUsersAspNetUser" TypeName="Model.AspNetRoleUsersAspNetUser" StoreEntitySet="AspNetRoleUsers">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
+      </EndProperty>
+      <EndProperty Name="AspNetRoleUsers">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AspNetRoleUsersAspNetRole" TypeName="Model.AspNetRoleUsersAspNetRole" StoreEntitySet="AspNetRoleUsers">
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
+      </EndProperty>
+      <EndProperty Name="AspNetRoleUsers">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
