@@ -206,6 +206,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DBEntities\Booking.cs" />
+    <Compile Include="Models\DBEntities\Coach.cs" />
+    <Compile Include="Models\DBEntities\Location.cs" />
+    <Compile Include="Models\DBEntities\Trip.cs" />
+    <Compile Include="Models\DBEntities\Trip_Locations.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
