@@ -63,6 +63,9 @@ namespace DashoundCoachTravels.Controllers
 
         //
         // POST: /Account/Login
+        // THIS CONTROLLER WAS MODIFIED
+        // changed fields to reflect the changes made in LoginViewModel class in AccountViewModels.cs
+        // eg emial -> username
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -75,7 +78,7 @@ namespace DashoundCoachTravels.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -144,6 +147,8 @@ namespace DashoundCoachTravels.Controllers
 
         //
         // POST: /Account/Register
+        //MODIFIED to reflect changes in RegisterViewModel in AccountViewModels.cs.
+        //added addition fields for registration
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -151,10 +156,27 @@ namespace DashoundCoachTravels.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //*****later here will be added user role management too eg admin\user\emplyee
+                //*****for now all users are "equal"
+
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    //added new fields added in RegisterViewModel in  AccountViewModels.cs
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    Country = model.Country,
+                    Town = model.Town,
+                    Street = model.Street,
+                    NumHouse = model.NumHouse,
+                    NumFlat = model.NumFlat,
+                    ZIPCode = model.ZIPCode
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //*****later here will be added user role authentication eg: admin, user, emplyee etc.
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

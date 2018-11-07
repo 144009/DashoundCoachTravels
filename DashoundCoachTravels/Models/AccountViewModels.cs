@@ -118,7 +118,7 @@ namespace DashoundCoachTravels.Models
         [Display(Name = "House number")]
         public string NumHouse { get; set; }
 
-        [Display(Name = "Enter your flat number (optional)")]
+        [Display(Name = "Flat number (optional)")]
         public string NumFlat { get; set; }
 
         [Required(ErrorMessage = "Enter your postal code")]
