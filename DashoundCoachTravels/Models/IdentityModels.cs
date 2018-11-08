@@ -76,5 +76,9 @@ namespace DashoundCoachTravels.Models
         {
             return new ApplicationDbContext();
         }
+
+        //public System.Data.Entity.DbSet<DashoundCoachTravels.Models.EditUserRoleViewModel> EditUserRoleViewModels { get; set; }
+
+        //public System.Data.Entity.DbSet<DashoundCoachTravels.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

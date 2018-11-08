@@ -53,6 +53,6 @@ namespace DashoundCoachTravels.Models.DBEntities
         public string UserId { get; set; }
 
         public Trip Trip { get; set; }
-        public ApplicationUser User { get; set; }
+        //public ApplicationUser User { get; set; }
     }
 }

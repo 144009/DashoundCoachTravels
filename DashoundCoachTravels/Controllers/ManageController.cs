@@ -322,6 +322,12 @@ namespace DashoundCoachTravels.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        // GET: /Manage/AccessDenied
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)

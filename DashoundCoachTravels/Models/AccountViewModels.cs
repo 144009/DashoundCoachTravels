@@ -50,7 +50,6 @@ namespace DashoundCoachTravels.Models
     {
         [Required]
         [Display(Name = "Your user name")]
-        [EmailAddress]
         public string Username { get; set; }
 
         [Required]

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DashoundCoachTravels.Models.ApplicationUser>
+@using DashoundCoachTravels.Helpers
+@{
+    ViewBag.Title = "Manage user accounts";
+}
+<h1>@ViewBag.Title</h1>
+<br />
+<p class="text-success">@ViewBag.StatusMessahe</p>
+<br />
+<table class="table">
+    <tr>
+        <th>User name</th>
+        <th>Email</th>
+        <th>Permissions type</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumHouse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumFlat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZIPCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+
+        @if (UserRoleHelper.IsAdmin(item.Id))
+        {
+            <td class="role-admin">Administrator</td>}
+        @if (UserRoleHelper.IsEmployee(item.Id))
+        {
+            <td class="role-admin">Employee</td>}
+        @if (UserRoleHelper.IsUser(item.Id))
+        {
+            <td class="role-admin">Customer/Basic</td>}
+        <td>
+            @Html.DisplayNameFor(model => model.Name)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Surname)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Country)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Town)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Street)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.NumHouse)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.NumFlat)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.ZIPCode)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit account details", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Show account details", "Details", new { id = item.Id })
+            @Html.ActionLink("Edit account permissions", "EditRole", new { id = item.Id })|
+            @Html.ActionLink("Delete account", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+    }
+
+</table>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DashoundCoachTravels.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DashoundCoachTravels.Controllers
 {
@@ -156,13 +157,16 @@ namespace DashoundCoachTravels.Controllers
         {
             if (ModelState.IsValid)
             {
-                //*****later here will be added user role management too eg admin\user\emplyee
-                //*****for now all users are "equal"
+                ApplicationDbContext dbcontext = new ApplicationDbContext();
+                var roleStore = new RoleStore<IdentityRole>(dbcontext);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var userStore = new UserStore<ApplicationUser>(dbcontext);
+                var userManager = new UserManager<ApplicationUser>(userStore);
 
                 var user = new ApplicationUser {
+                //added new fields added in RegisterViewModel in  AccountViewModels.cs
                     UserName = model.Email,
                     Email = model.Email,
-                    //added new fields added in RegisterViewModel in  AccountViewModels.cs
                     Name = model.Name,
                     Surname = model.Surname,
                     Country = model.Country,
@@ -175,7 +179,8 @@ namespace DashoundCoachTravels.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //*****later here will be added user role authentication eg: admin, user, emplyee etc.
+                    userManager.AddToRole(user.Id, "User");
+                    dbcontext.SaveChanges();
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
