@@ -22,7 +22,7 @@
         <h4>Here will be added links to subpages like statistics, user management etc for Employees only</h4>
         if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
         {
-            <p>Manage User Accounts:</p>
+            <p>Manage User Roles:</p>
             <p>@Html.ActionLink("Manage user accounts", "Index", "ManageUsers", routeValues: null, htmlAttributes: new { })</p>
         }
     }

@@ -1,0 +1,102 @@
+﻿@model DashoundCoachTravels.Models.EditUserRoleViewModel
+@using DashoundCoachTravels.Helpers
+
+@{
+    ViewBag.Title = "Edit User Permissions";
+}
+
+
+<h4>Change User Account Permissions</h4>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Surname)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Surname)
+    </dd>
+    <dt>Permission Type</dt>
+    @if (UserRoleHelper.IsAdmin(Model.Id))
+    {
+        <dd class="role-admin">Administrator</dd>}
+    @if (UserRoleHelper.IsEmployee(Model.Id))
+    {
+        <dd class="role-admin">Employee</dd>}
+    @if (UserRoleHelper.IsUser(Model.Id))
+    {
+        <dd class="role-admin">Customer/Basic</dd>}
+
+</dl>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr/>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RoleType)
+            <div class="col-md-10">
+                @{
+                    List<SelectListItem> listAllRoles = new List<SelectListItem>();
+                    listAllRoles.Add(new SelectListItem
+                    {
+                        Text = "Administrator",
+                        Value = "Administrator"
+                    });
+                    listAllRoles.Add(new SelectListItem
+                    {
+                        Text = "Employee",
+                        Value = "Employee"
+                    });
+                    listAllRoles.Add(new SelectListItem
+                    {
+                        Text = "Customer",
+                        Value = "Customer"
+                    });
+                }
+                @Html.DropDownListFor(model => model.RoleType, listAllRoles)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
