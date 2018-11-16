@@ -1,0 +1,73 @@
+﻿@model DashoundCoachTravels.Models.EditAccountDetailsViewModel
+
+@{
+    ViewBag.Title = "Edit your account details";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("EditAccountDetails", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Enter new data</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", Value = ViewBag.Name })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Surname, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", Value = ViewBag.Surname })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Street, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Street, new { @class = "form-control", Value = ViewBag.Street })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumHouse, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.NumHouse, new { @class = "form-control", Value = ViewBag.NumHouse })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumFlat, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.NumFlat, new { @class = "form-control", Value = ViewBag.NumFlat })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Town, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Town, new { @class = "form-control", Value = ViewBag.Town })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Country, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Country, new { @class = "form-control", Value = ViewBag.Country })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ZIPCode, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.ZIPCode, new { @class = "form-control", Value = ViewBag.ZIPCode })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">
+                <i class="glyphicon glyphicon-pencil"></i> Zapisz
+            </button>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

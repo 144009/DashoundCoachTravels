@@ -291,6 +291,7 @@
     <Content Include="Views\ManageUsers\Details.cshtml" />
     <Content Include="Views\ManageUsers\Edit.cshtml" />
     <Content Include="Views\ManageUsers\EditUserRoles.cshtml" />
+    <Content Include="Views\Manage\EditAccountDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

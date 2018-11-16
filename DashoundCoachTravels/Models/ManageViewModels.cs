@@ -14,6 +14,48 @@ namespace DashoundCoachTravels.Models
         public bool BrowserRemembered { get; set; }
     }
 
+    public class EditAccountDetailsViewModel
+    {
+        [Required(ErrorMessage = "Enter your name.")]
+        [StringLength(100)]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Enter your surname.")]
+        [StringLength(100)]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required(ErrorMessage = "Enter your country")]
+        [StringLength(100)]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [Required(ErrorMessage = "Enter your town")]
+        [StringLength(100)]
+        [Display(Name = "Town")]
+        public string Town { get; set; }
+
+        [Required(ErrorMessage = "Enter your street name")]
+        [StringLength(100)]
+        [Display(Name = "Street")]
+        public string Street { get; set; }
+
+        [Required(ErrorMessage = "Enter your house number.")]
+        [Display(Name = "House number")]
+        public string NumHouse { get; set; }
+
+        [Display(Name = "Flat number (optional)")]
+        public string NumFlat { get; set; }
+
+        [Required(ErrorMessage = "Enter your ZIP code.")]
+        [StringLength(100)]
+        [Display(Name = "ZIP Code")]
+        public string ZIPCode { get; set; }
+    }
+
+
+
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

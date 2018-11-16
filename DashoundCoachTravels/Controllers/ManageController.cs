@@ -7,12 +7,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DashoundCoachTravels.Models;
+using DashoundCoachTravels.Helpers;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Net;
 
 namespace DashoundCoachTravels.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        //added a local database context for use
+        private ApplicationDbContext dbcontext = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -64,6 +70,16 @@ namespace DashoundCoachTravels.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+
+
+            // Account Info for View
+            ApplicationUser CurrUser = dbcontext.Users.Find(userId);
+            ViewBag.Name = CurrUser.Name + " " + CurrUser.Surname;
+            ViewBag.CountryTown = CurrUser.Town + " in " + CurrUser.Country + ", " + CurrUser.ZIPCode;
+            ViewBag.Email = CurrUser.Email;
+            ViewBag.User = CurrUser.UserName;
+
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -73,6 +89,75 @@ namespace DashoundCoachTravels.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        // duplicated action EDIT POST/GET and changed to EditUserRoles
+        // GET: Manage/EditAccountDetails/5
+        public ActionResult EditAccountDetails()
+        {
+            var Id = User.Identity.GetUserId();
+            if (Id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+
+            ApplicationUser CurrUser = dbcontext.Users.Find(Id);
+            if (CurrUser == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Account Info Details for View
+            ViewBag.Name = CurrUser.Name;
+            ViewBag.Surname = CurrUser.Surname;
+            ViewBag.Country = CurrUser.Country;
+            ViewBag.Town = CurrUser.Town;
+            ViewBag.Street = CurrUser.Street;
+            ViewBag.NumHouse = CurrUser.NumHouse;
+            ViewBag.NumFlat = CurrUser.NumFlat;
+            ViewBag.ZIPCode = CurrUser.ZIPCode;
+
+            return View();
+        }
+
+        // POST: Manage/EditAccountDetails/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // all fields will be used so instead of Bind we can use just the ready Model for it
+        public async Task<ActionResult> EditAccountDetails(EditAccountDetailsViewModel field)
+        {
+            if (ModelState.IsValid)
+            {
+                var Id = User.Identity.GetUserId();
+                if (Id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+                
+                // how to do async update user operation
+                // https://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
+                var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+                var manager = new UserManager<ApplicationUser>(store);
+                var CurrUser = manager.FindById(Id);
+
+                if (CurrUser == null)
+                {
+                    return HttpNotFound();
+                }
+                // update data
+                CurrUser.Name = field.Name;
+                CurrUser.Surname = field.Surname;
+                CurrUser.Country = field.Country;
+                CurrUser.Town = field.Town;
+                CurrUser.Street = field.Street;
+                CurrUser.NumHouse = field.NumHouse;
+                CurrUser.NumFlat = field.NumFlat;
+                CurrUser.ZIPCode = field.ZIPCode;
+
+                IdentityResult result = await manager.UpdateAsync(CurrUser);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", new { Message = ManageMessageId.EditAccountDetailsSucceess });
+                }
+                AddErrors(result);
+                return View(field);
+            }
+
+            return View(field);
         }
 
         //
@@ -382,6 +467,7 @@ namespace DashoundCoachTravels.Controllers
         public enum ManageMessageId
         {
             AddPhoneSuccess,
+            EditAccountDetailsSucceess,
             ChangePasswordSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
