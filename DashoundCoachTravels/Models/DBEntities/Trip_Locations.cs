@@ -18,12 +18,12 @@ namespace DashoundCoachTravels.Models.DBEntities
         [Display(Name = "Sightseeing order")]
         public int Number { get; set; } // shows order of places to sightsee
 
-        [ForeignKey("Trip")]
-        public int TripId { get; set; }
-        [ForeignKey("Location")]
-        public int LocationId { get; set; }
+        [ForeignKey("TripsId")]
+        public int Id_Trip { get; set; }
+        [ForeignKey("LocationsId")]
+        public int Id_Location { get; set; }
 
-        public Location Location { get; set; }
-        public Trip Trip { get; set; }
+        public Location LocationsId { get; set; }
+        public Trip TripsId { get; set; }
     }
 }

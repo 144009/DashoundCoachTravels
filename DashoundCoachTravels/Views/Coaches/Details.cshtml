@@ -1,0 +1,71 @@
+﻿@model DashoundCoachTravels.Models.DBEntities.Coach
+@{
+    ViewBag.Title = "Vehicle details";
+}
+
+<div>
+    <h4>Coach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehScreenshot)
+        </dt>
+
+        <dd>
+            @if (!String.IsNullOrEmpty(Model.VehScreenshot))
+            {
+                <img src="@Model.VehScreenshot" class="img-thumbnail" alt="Miniaturka" width="200" height="200">
+            }
+            else
+            {
+                <img src="~/media/default.jpg" class="img-thumbnail" alt="Miniaturka" width="200" height="200">
+            }
+            @*@Html.DisplayFor(model => model.VehScreenshot)*@
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | 
+    @Html.ActionLink("Back to List", "Index")
+</p>

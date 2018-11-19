@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\UserRoleHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -214,8 +215,21 @@
     <Compile Include="Migrations\201811081220199_sampleData.Designer.cs">
       <DependentUpon>201811081220199_sampleData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811161708461_TableCoachesUpdated.cs" />
+    <Compile Include="Migrations\201811161708461_TableCoachesUpdated.Designer.cs">
+      <DependentUpon>201811161708461_TableCoachesUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811182029089_FK_fixes.cs" />
+    <Compile Include="Migrations\201811182029089_FK_fixes.Designer.cs">
+      <DependentUpon>201811182029089_FK_fixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811191301020_Table_Coaches_newfield.cs" />
+    <Compile Include="Migrations\201811191301020_Table_Coaches_newfield.Designer.cs">
+      <DependentUpon>201811191301020_Table_Coaches_newfield.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CoachesViewModels.cs" />
     <Compile Include="Models\DBEntities\Booking.cs" />
     <Compile Include="Models\DBEntities\Coach.cs" />
     <Compile Include="Models\DBEntities\Location.cs" />
@@ -228,6 +242,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -236,6 +252,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="media\CompanyLogo.jpg" />
+    <Content Include="media\default.jpg" />
+    <Content Include="media\Vehicle\320x160 jpg.txt" />
+    <Content Include="media\Vehicle\Type1.jpg" />
+    <Content Include="media\Vehicle\Type2.jpg" />
+    <Content Include="media\Vehicle\Type3.jpg" />
+    <Content Include="media\Vehicle\Type4.jpg" />
+    <Content Include="media\Vehicle\Type5.jpg" />
+    <Content Include="media\Vehicle\Type6.jpg" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -252,6 +279,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -292,6 +323,11 @@
     <Content Include="Views\ManageUsers\Edit.cshtml" />
     <Content Include="Views\ManageUsers\EditUserRoles.cshtml" />
     <Content Include="Views\Manage\EditAccountDetails.cshtml" />
+    <Content Include="Views\Coaches\Index.cshtml" />
+    <Content Include="Views\Coaches\Create.cshtml" />
+    <Content Include="Views\Coaches\Details.cshtml" />
+    <Content Include="Views\Coaches\Edit.cshtml" />
+    <Content Include="Views\Coaches\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -318,6 +354,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811081220199_sampleData.resx">
       <DependentUpon>201811081220199_sampleData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811161708461_TableCoachesUpdated.resx">
+      <DependentUpon>201811161708461_TableCoachesUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811182029089_FK_fixes.resx">
+      <DependentUpon>201811182029089_FK_fixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811191301020_Table_Coaches_newfield.resx">
+      <DependentUpon>201811191301020_Table_Coaches_newfield.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

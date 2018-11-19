@@ -132,7 +132,7 @@ namespace DashoundCoachTravels.Controllers
                 // https://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
                 var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
                 var manager = new UserManager<ApplicationUser>(store);
-                var CurrUser = manager.FindById(Id);
+                ApplicationUser CurrUser = manager.FindById(Id);
 
                 if (CurrUser == null)
                 {

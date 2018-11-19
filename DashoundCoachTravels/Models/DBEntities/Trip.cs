@@ -50,9 +50,8 @@ namespace DashoundCoachTravels.Models.DBEntities
         [Display(Name = "Thumbnail (optional)")]
         public string BannerSmall { get; set; }
 
-        [Required(ErrorMessage = "Enter trip name")]
-        [StringLength(100)]
-        [Display(Name = "Trip Name")]
-        public string CoachType { get; set; }
+        [Required(ErrorMessage = "Enter designated Coach")]
+        [Display(Name = "Coach Vehicle Number")]
+        public int CoachNumberId { get; set; }
     }
 }

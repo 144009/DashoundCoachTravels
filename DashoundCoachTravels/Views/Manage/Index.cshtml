@@ -24,10 +24,14 @@
     {
         if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
         {
-        <dl class="dl-horizontal">
-            <dt>Manage user accounts:</dt>
-            <dd>[@Html.ActionLink("Manage user accounts", "Index", "ManageUsers", routeValues: null, htmlAttributes: new { })]</dd>
-        </dl>
+            <dl class="dl-horizontal">
+                <dt>Manage user accounts:</dt>
+                <dd>[@Html.ActionLink("Manage user accounts", "Index", "ManageUsers", routeValues: null, htmlAttributes: new { })]</dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt>Manage vehicles:</dt>
+                <dd>[@Html.ActionLink("Manage avaliable vehicles", "Index", "Coaches", routeValues: null, htmlAttributes: new { })]</dd>
+            </dl>
         }
     }
 

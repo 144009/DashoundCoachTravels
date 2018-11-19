@@ -46,13 +46,11 @@ namespace DashoundCoachTravels.Models.DBEntities
         [Display(Name = "Reservation Status")]
         public string Status { get; set; }
 
-        [Display(Name = "Trip")]
-        public int TripId { get; set; }
-
-        [Display(Name = "User")]
-        public string UserId { get; set; }
-
-        public Trip Trip { get; set; }
-        //public ApplicationUser User { get; set; }
+        [ForeignKey("TripsId")]
+        public int Id_Trip { get; set; }
+        [ForeignKey("UsersId")]
+        public string Id_User { get; set; }
+        public Trip TripsId { get; set; }
+        public ApplicationUser UsersId { get; set; }
     }
 }
