@@ -33,5 +33,8 @@ namespace DashoundCoachTravels.Models.DBEntities
         [DisplayFormat(NullDisplayText = "-")]
         [Display(Name = "Place Description")]
         public string Description { get; set; }
+
+        [Display(Name = "Location Photo (optional)")]
+        public string LocationPhoto { get; set; }
     }
 }

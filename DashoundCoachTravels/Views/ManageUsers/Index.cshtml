@@ -46,10 +46,10 @@
     {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
 
         @if (UserRoleHelper.IsAdmin(item.Id))
@@ -90,10 +90,15 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id })
-            @Html.ActionLink("Permissions", "EditUserRoles", new { id = item.Id })|
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+            @Html.ActionLink("Permissions", "EditUserRoles", new { id = item.Id })
         </td>
     </tr>
     }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

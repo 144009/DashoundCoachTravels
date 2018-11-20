@@ -34,6 +34,7 @@ namespace DashoundCoachTravels.Controllers
                 : message == ManageMessageId.ChangeRoleToCustomer ? "Changed account permissions to : Customer/Basic."
                 : message == ManageMessageId.ChangeRoleToEmployee ? "Changed account permissions to : Employee."
                 : message == ManageMessageId.ChangeRoleToAdmin ? "Changed account permissions to : Administrator."
+                : message == ManageMessageId.DeleteUserSuccess ? "Successfully deleted user account."
                 : message == ManageMessageId.ChangeOwnRoleErr ? "Cannot change own account permission type!"
                 : message == ManageMessageId.Error ? "An error has occured."
                 : "";
@@ -103,6 +104,7 @@ namespace DashoundCoachTravels.Controllers
             field.NumHouse = CurrUser.NumHouse;
             field.NumFlat = CurrUser.NumFlat;
             field.ZIPCode = CurrUser.ZIPCode;
+            field.PhoneNumber = CurrUser.PhoneNumber;
 
             if (UserRoleHelper.IsAdmin(field.Id)) { field.RoleType = UserRoleTypes.Administrator; }
             if (UserRoleHelper.IsEmployee(field.Id)) { field.RoleType = UserRoleTypes.Employee; }
@@ -213,6 +215,45 @@ namespace DashoundCoachTravels.Controllers
         }
 
 
+        // GET: ManageUsers/Delete/5
+        public ActionResult Delete(string Id)
+        {
+            if (Id == null) { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
+            if (!UserRoleHelper.IsAdmin(User.Identity.GetUserId())) // check if current user has admin rights
+            {
+                return RedirectToAction("AccessDenied", "Manage");
+            }
+            ApplicationUser CurrUser = dbcontext.Users.Find(Id);
+            if (CurrUser == null) return HttpNotFound();
+
+            return View(CurrUser);
+        }
+
+        // POST: ManageUsers/Delete/5
+        [HttpPost]
+        public ActionResult Delete(string Id, FormCollection collection)
+        {
+            if (!UserRoleHelper.IsAdmin(User.Identity.GetUserId())) // check if current user has admin rights
+            {
+                return RedirectToAction("AccessDenied", "Manage");
+            }
+            try
+            {
+                // TODO: Add delete logic here
+                ApplicationUser CurrUser = dbcontext.Users.Find(Id);
+                if (CurrUser == null) return HttpNotFound();
+                dbcontext.Users.Remove(CurrUser);
+                dbcontext.SaveChanges();
+
+                return RedirectToAction("Index", new { Message = ManageMessageId.DeleteUserSuccess });
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+            }
+        }
+
+
 
         protected override void Dispose(bool disposing) //free resources after finishing edit for garbage collector
         {
@@ -228,6 +269,7 @@ namespace DashoundCoachTravels.Controllers
         public enum ManageMessageId // message pool that can be displayed after an operation
         {
             EditUserSuccess,
+            DeleteUserSuccess,
             ChangeRoleToCustomer,
             ChangeRoleToEmployee,
             ChangeRoleToAdmin,

@@ -52,6 +52,10 @@ namespace DashoundCoachTravels.Models
         [StringLength(100)]
         [Display(Name = "ZIP Code")]
         public string ZIPCode { get; set; }
+
+        [StringLength(20)]
+        [Display(Name = "Phone number (optional)")]
+        public string PhoneNumber { get; set; }
     }
 
 

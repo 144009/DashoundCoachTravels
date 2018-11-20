@@ -113,6 +113,7 @@ namespace DashoundCoachTravels.Controllers
             ViewBag.NumHouse = CurrUser.NumHouse;
             ViewBag.NumFlat = CurrUser.NumFlat;
             ViewBag.ZIPCode = CurrUser.ZIPCode;
+            ViewBag.PhoneNumber = CurrUser.PhoneNumber;
 
             return View();
         }
@@ -147,6 +148,7 @@ namespace DashoundCoachTravels.Controllers
                 CurrUser.NumHouse = field.NumHouse;
                 CurrUser.NumFlat = field.NumFlat;
                 CurrUser.ZIPCode = field.ZIPCode;
+                CurrUser.PhoneNumber = field.PhoneNumber;
 
                 IdentityResult result = await manager.UpdateAsync(CurrUser);
                 if (result.Succeeded)

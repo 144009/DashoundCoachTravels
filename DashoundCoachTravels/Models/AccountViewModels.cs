@@ -125,6 +125,10 @@ namespace DashoundCoachTravels.Models
         [Display(Name = "Postal code")]
         public string ZIPCode { get; set; }
 
+        [StringLength(20)]
+        [Display(Name = "Phone number (optional)")]
+        public string PhoneNumber { get; set; }
+
     }
 
     public class ResetPasswordViewModel

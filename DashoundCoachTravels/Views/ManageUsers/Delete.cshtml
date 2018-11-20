@@ -1,43 +1,10 @@
 ﻿@model DashoundCoachTravels.Models.ApplicationUser
-@using DashoundCoachTravels.Helpers
 
-@{
-    ViewBag.Title = "Account Details";
-}
-
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>User Information</h4>
+    <h4>Application User</h4>
     <hr />
     <dl class="dl-horizontal">
-        @*Section is  being shown depending on current account role*@
-
-        <dt>Permission Type:</dt>
-        @if (UserRoleHelper.IsAdmin(Model.Id))
-        {
-            <dd class="role-admin">Administrator</dd>}
-        @if (UserRoleHelper.IsEmployee(Model.Id))
-        {
-            <dd class="role-admin">Employee</dd>}
-        @if (UserRoleHelper.IsUser(Model.Id))
-        {
-            <dd class="role-admin">Customer/Basic</dd>}
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -103,6 +70,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
 
@@ -110,11 +85,22 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Permissions", "EditUserRoles", new { id = Model.Id })|
-</p>

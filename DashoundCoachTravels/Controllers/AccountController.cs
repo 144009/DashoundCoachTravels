@@ -174,7 +174,8 @@ namespace DashoundCoachTravels.Controllers
                     Street = model.Street,
                     NumHouse = model.NumHouse,
                     NumFlat = model.NumFlat,
-                    ZIPCode = model.ZIPCode
+                    ZIPCode = model.ZIPCode,
+                    PhoneNumber = model.PhoneNumber
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

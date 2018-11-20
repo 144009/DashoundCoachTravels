@@ -45,6 +45,9 @@ namespace DashoundCoachTravels.Models
         [Display(Name = "Postal code")]
         public string ZIPCode { get; set; }
 
+        [Display(Name = "Phone number (optional)")]
+        public string PhoneNumber { get; set; }
+
         [Display(Name = "Permission level")]
         public UserRoleTypes RoleType { get; set; }
     }
