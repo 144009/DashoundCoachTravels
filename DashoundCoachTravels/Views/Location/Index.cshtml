@@ -1,0 +1,100 @@
+﻿@model  DashoundCoachTravels.Models.LocationsViewModels
+@using DashoundCoachTravels.Helpers
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Manage available locations";
+}
+<h1>@ViewBag.Title</h1>
+<br />
+<p class="text-success">@ViewBag.StatusMessage</p>
+<br />
+
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" id="Search" placeholder="Location name" class="form-control" />
+            @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
+            {
+                <a href="@Url.Action("Create")" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    Add a new location
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Location Photo
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.List)
+    {
+        <tr id="Search" class="Search">
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @if (!String.IsNullOrEmpty(item.LocationImage))
+                {
+                    <img src="@item.LocationImage" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                }
+                else
+                {
+                    <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to list", "Index", "Manage", routeValues: null, htmlAttributes: new { })
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1) { return true; }
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+
+        });
+    })
+</script>

@@ -196,6 +196,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CoachesController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
     <Compile Include="Controllers\UserRoleHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -227,6 +228,10 @@
     <Compile Include="Migrations\201811191301020_Table_Coaches_newfield.Designer.cs">
       <DependentUpon>201811191301020_Table_Coaches_newfield.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811201326294_Table_Locations_newentries.cs" />
+    <Compile Include="Migrations\201811201326294_Table_Locations_newentries.Designer.cs">
+      <DependentUpon>201811201326294_Table_Locations_newentries.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CoachesViewModels.cs" />
@@ -236,6 +241,7 @@
     <Compile Include="Models\DBEntities\Trip.cs" />
     <Compile Include="Models\DBEntities\Trip_Locations.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LocationsViewModels.cs" />
     <Compile Include="Models\ManageUsersViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,8 +258,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="media\CompanyLogo.jpg" />
+    <Content Include="media\CompanyLogo.png" />
     <Content Include="media\default.jpg" />
+    <Content Include="media\Location\320x160 jpg.txt" />
+    <Content Include="media\Location\Type1.jpg" />
+    <Content Include="media\Location\Type2.jpg" />
+    <Content Include="media\Location\Type3.jpg" />
+    <Content Include="media\Location\Type4.jpg" />
+    <Content Include="media\Location\Type5.jpg" />
+    <Content Include="media\Location\Type6.jpg" />
+    <Content Include="media\Location\Type7.jpg" />
+    <Content Include="media\Location\Type8.jpg" />
     <Content Include="media\Vehicle\320x160 jpg.txt" />
     <Content Include="media\Vehicle\Type1.jpg" />
     <Content Include="media\Vehicle\Type2.jpg" />
@@ -329,6 +344,11 @@
     <Content Include="Views\Coaches\Edit.cshtml" />
     <Content Include="Views\Coaches\Delete.cshtml" />
     <Content Include="Views\ManageUsers\Delete.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
+    <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\Location\Edit.cshtml" />
+    <Content Include="Views\Location\Delete.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -364,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811191301020_Table_Coaches_newfield.resx">
       <DependentUpon>201811191301020_Table_Coaches_newfield.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811201326294_Table_Locations_newentries.resx">
+      <DependentUpon>201811201326294_Table_Locations_newentries.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

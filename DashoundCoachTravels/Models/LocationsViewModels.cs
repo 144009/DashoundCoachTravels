@@ -1,19 +1,15 @@
-﻿using System;
+﻿using DashoundCoachTravels.Models.DBEntities;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Security.Claims;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace DashoundCoachTravels.Models.DBEntities
+namespace DashoundCoachTravels.Models
 {
-    [Table("Locations")]
-    public class Location
+    public class LocationsViewModels
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public IEnumerable<Location> List { get; set; }
 
         [Required(ErrorMessage = "Destination Country Name")]
         [StringLength(100)]
@@ -30,9 +26,9 @@ namespace DashoundCoachTravels.Models.DBEntities
         [Display(Name = "Place Name")]
         public string Name { get; set; } // example: Colosseum 
 
-        [DisplayFormat(NullDisplayText = "-")]
+        /*[DisplayFormat(NullDisplayText = "-")]
         [Display(Name = "Place Description")]
-        public string Description { get; set; }
+        public string Description { get; set; }*/
 
         [Display(Name = "Location Photo (optional)")]
         public string LocationImage { get; set; }

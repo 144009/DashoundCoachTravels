@@ -145,11 +145,11 @@
             <td>
                 @if (!String.IsNullOrEmpty(item.VehScreenshot))
                 {
-                    <img src="@item.VehScreenshot" class="img-thumbnail" alt="Miniaturka" width="200" height="200">
+                    <img src="@item.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
                 }
                 else
                 {
-                    <img src="~/media/default.jpg" class="img-thumbnail" alt="Miniaturka" width="200" height="200">
+                    <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
                 }
 
 
@@ -166,7 +166,7 @@
 </table>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to list", "Index", "Manage", routeValues: null, htmlAttributes: new { })
 </div>
 
 <script type="text/javascript">
