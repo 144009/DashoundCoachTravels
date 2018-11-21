@@ -16,39 +16,170 @@
     <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body id="main">
+    <div id="tlo">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Dashound Coach Travels", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <a href="/" id="header">
+                <img src="~/Media/CompanyLogo.png" title="Dashound Coach Travels">
+            </a>
+            <div id="accountNav">
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    <!--Odpowiada za wyswietlanie strzalki przewijania w gore.
+    Domyslnie ma wartosc display:none jesli user jeszcze nie przewiną strony w dol
+    Skrypt znajduje sie w pliku footer.php
+    -->
+    <a href="#" class="scrollToTop"></a>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" id="navigationBar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" id="navMenu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="mainContent" class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Internet Application Project</p>
-        </footer>
     </div>
 
+    <section id=footer>
+        <div class="container">
+            <div class="row">
+                <div id="weii" class="col-md-4">
+                    <a href="http://weii.portal.prz.edu.pl" target="_blank"><img src="~/Media/weii_logo.png" alt="" class="img-responsive"></a>
+                </div>
+                <div id="prz" class="col-md-4">
+                    <a href="http://portal.prz.edu.pl" target="_blank"><img src="~/Media/prz_logo.png" alt="" class="img-responsive"></a>
+                </div>
+                <div id="info">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="copy">&copy; @DateTime.Now.Year - Internet Application Project</div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+
+
+@*OLD UNUSED
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Dashound Coach Travels", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav" id="menuTest">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Internet Application Project</p>
+            </footer>
+        </div>
+
+
+    </body>
+*@
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Check to see if the window is top if not then display button
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('.scrollToTop').fadeIn();
+            } else {
+                $('.scrollToTop').fadeOut();
+            }
+        });
+
+        //Click event to scroll to top
+        $('.scrollToTop').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+
+    });
+</script>
+
+
+<!-- SKRYPT : sprawdza czy strona została zescrollowana w dół 110px (wysokość diva z logiem strony). Jeśli tak, to modyfikuje css elementu .navbar (menu), tak by był przypięty do góry strony i zawsze widoczny),
+Modyfikuje div tlo by zmiana była łagodna i nie zauważalna (brak przeskoku). Jeżeli użytkownik zecrolluje do góry zmiany zostają cofnięte ELSE.
+
+Całość sie wykona tylko, jeśli szerokość okna jest większa niż 764px
+-->
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        $(function () {
+            $('#navigationBar').data('size', 'big');
+        });
+
+        var szer = window.outerWidth;
+        if (szer >= 764) {
+
+            $(window).scroll(function () {
+                if ($(document).scrollTop() > 73) {
+                    if ($('#navigationBar').data('size') == 'big') {
+                        $('#navigationBar').data('size', 'small');
+                        $('div#tlo').stop().css({ 'margin-bottom': '60px' });
+                        $('#navigationBar').stop().css({ 'position': 'fixed', 'z-index': '9999', 'width': '100%' });
+                        $('#navigationBar').stop().css({ 'top': '0px' });
+                    }
+                } else {
+                    if ($('#navigationBar').data('size') == 'small') {
+                        $('#navigationBar').data('size', 'big');
+                        $('div#tlo').stop().css({ 'margin-bottom': '0px' });
+                        $('#navigationBar').stop().css({ 'position': 'relative' });
+                        $('#navigationBar').stop().css({ 'top': '0' });
+                    }
+                }
+            });
+        }
+    });
+</script>

@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -22,3 +22,170 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* MY OWN CUSTOM STYLESHEET FOR MVC APPLICATION STARTS BELOW*/
+
+/* #####################################################################################
+###################### Do GÓRY #########################################################
+##################################################################################### */
+.scrollToTop {
+    position: fixed;
+    bottom: 5%;
+    z-index: 999999;
+    right: 5%;
+    display: none;
+    -webkit-transition: background 250ms ease 250ms;
+    transition: background 250ms ease 250ms;
+}
+
+    .scrollToTop:before {
+        content: "\5E";
+        font-size: 5em;
+    }
+
+    .scrollToTop:visited {
+        text-decoration: none;
+    }
+
+    .scrollToTop:focus {
+        text-decoration: none;
+    }
+
+    .scrollToTop:hover {
+        text-decoration: none;
+    }
+
+/* #####################################################################################
+###################### Navbar + Header #########################################################
+##################################################################################### */
+body#main {
+    color: #333;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Open Sans',Arial,sans-serif;
+}
+div#tlo {
+    background: #fff;
+    background-size: cover;
+    z-index: 9999 !important;
+    top: 0;
+    width: 100%;
+    display: block;
+}
+
+    div#tlo a#header {
+        float: left;
+        display: block;
+        margin: 0;
+        width: auto;
+        padding: 10px 0;
+    }
+
+        div#tlo a#header img {
+            vertical-align: middle;
+            width: 40%;
+            margin: 0 auto;
+            height: auto;
+        }
+
+
+div#accountNav {
+    display: block;
+    float: right;
+    margin-top: 1%;
+}
+
+div#navigationBar {
+    position: relative;
+    width: 100%;
+    background-color: #F2F2F2;
+    display: block;
+    z-index: 800;
+    min-height: 0px;
+    border-color: #fff0;
+    margin-bottom: 0px;
+    box-shadow: inset 10px 10px 19px 0 rgba(0,0,0,.05);
+}
+
+    div#accountNav ul li > a, div#navigationBar ul#navMenu li > a, div#accountNav ul li > a:visited, div#navigationBar ul#navMenu li > a:visited {
+        color: #12354C;
+        font-size: 0.93em;
+        font-weight: 600;
+        overflow: hidden;
+        padding: 15px 34px;
+        height: auto;
+        -webkit-transition: 0.5s background ease;
+        transition: 0.5s background ease;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+        div#accountNav ul li > a:focus, div#accountNav ul li > a:hover, div#navigationBar ul#navMenu li > a:focus, div#navigationBar ul#navMenu li > a:hover {
+            background-color: #bcc1c324;
+            -webkit-transition: 0.5s all ease;
+            transition: all 0.5s ease 0s;
+            height: inherit;
+            color: #0075C1;
+            font-weight: 700;
+        }
+        div#accountNav ul li > a:active, div#navigationBar ul#navMenu li > a:active {
+            color: #0075C1;
+            font-weight: 800;
+        }
+
+
+div#accountNav ul li i{
+    font-size: 30px;
+    padding-top: 40%;
+    color: #336dd4;
+}
+a#registerLink, a#loginLink, a#LogOff {
+    padding-left: 5px!important;
+    padding-right: 5px!important;
+}
+li#accountNavLine {
+    padding-top: 2%!important;
+    font-size: 24px!important;
+}
+/* #####################################################################################
+###################### STOPKA ##########################################################
+##################################################################################### */
+section#footer {
+    background-color: #34363c;
+    min-height: 115px;
+    box-shadow: 0px 0px 13px #484848 inset;
+}
+
+    section#footer div#weii, div#prz, div#info {
+        height: 115px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+        section#footer div#weii a img, div#prz a img {
+            width: 60%;
+        }
+
+    section#footer div#info p {
+        color: #fff;
+        text-align: right;
+    }
+
+
+footer {
+    background-color: #23262c;
+    color: #fff;
+    font-size: 16px;
+    min-height: 60px;
+}
+
+    footer div {
+        height: 60px;
+    }
+
+        footer div.copy {
+            padding-top: 19px;
+            text-align: center;
+        }

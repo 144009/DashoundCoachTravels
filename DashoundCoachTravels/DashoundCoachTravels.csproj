@@ -269,6 +269,7 @@
     <Content Include="media\Location\Type6.jpg" />
     <Content Include="media\Location\Type7.jpg" />
     <Content Include="media\Location\Type8.jpg" />
+    <Content Include="media\prz_logo.png" />
     <Content Include="media\Vehicle\320x160 jpg.txt" />
     <Content Include="media\Vehicle\Type1.jpg" />
     <Content Include="media\Vehicle\Type2.jpg" />
@@ -276,6 +277,7 @@
     <Content Include="media\Vehicle\Type4.jpg" />
     <Content Include="media\Vehicle\Type5.jpg" />
     <Content Include="media\Vehicle\Type6.jpg" />
+    <Content Include="media\weii_logo.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
