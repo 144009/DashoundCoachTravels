@@ -1,0 +1,75 @@
+﻿@model DashoundCoachTravels.Models.LocationsViewModels
+
+@{
+    ViewBag.Title = "Destinations";
+}
+
+<h1>@ViewBag.Title</h1>
+
+
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" id="Search" placeholder="Location name" class="form-control" />
+        </div>
+    </div>
+</div>
+
+<section id="pages">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="contents">
+                    <div id="LocationsList">
+
+                        @{
+                            if (Model.List != null)
+                            {
+                                <div class="row">
+                                    @foreach (var item in Model.List)
+                                    {
+                                    <div class="col-md-4 Search" id="Search">
+                                        <h3>@item.Name - @item.Country, @item.Town</h3>
+                                        @if (!String.IsNullOrEmpty(item.LocationImage))
+                                        {
+                                            <img src="@item.LocationImage" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                        }
+                                    </div>
+
+                                    }
+                                </div>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div
+></section>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1) { return true; }
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+
+        });
+    })
+</script>

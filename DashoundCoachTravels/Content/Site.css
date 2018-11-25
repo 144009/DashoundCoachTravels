@@ -135,11 +135,10 @@ div#navigationBar {
             font-weight: 800;
         }
 
-
-div#accountNav ul li i{
+div#accountNav ul li i {
     font-size: 30px;
     padding-top: 40%;
-    color: #336dd4;
+    color: #5f7192;
 }
 a#registerLink, a#loginLink, a#LogOff {
     padding-left: 5px!important;
@@ -149,13 +148,18 @@ li#accountNavLine {
     padding-top: 2%!important;
     font-size: 24px!important;
 }
+li#bookingNavbar {
+    margin-top: 6%;
+    font-size: 0.7em;
+    text-decoration: underline;
+    font-style: italic;
+}
 /* #####################################################################################
 ###################### STOPKA ##########################################################
 ##################################################################################### */
 section#footer {
-    background-color: #34363c;
+    background-color: #12354c;
     min-height: 115px;
-    box-shadow: 0px 0px 13px #484848 inset;
 }
 
     section#footer div#weii, div#prz, div#info {
@@ -189,3 +193,69 @@ footer {
             padding-top: 19px;
             text-align: center;
         }
+
+/* #####################################################################################
+###################### SEKCJA: podstrony################################################
+##################################################################################### */
+div#RolePanel, div#AccountPanel {
+    border-style: groove;
+    border-radius: 20px;
+}
+    div#RolePanel h4{
+        background: #eaeaea;
+        padding: 2px 2px 2px 2px;
+        text-align: -webkit-center;
+        font-size: 1.5em;
+        color: #bf2d2d;
+        font-weight: 700;
+        margin-top: 0px;
+        border-radius: 20px;
+    }
+    div#AccountPanel h4 {
+        background: #eaeaea;
+        padding: 2px 2px 2px 2px;
+        text-align: -webkit-center;
+        font-size: 1.5em;
+        color: #343961;
+        font-weight: 700;
+        margin-top: 0px;
+        border-radius: 20px;
+    }
+    div#RolePanel .dl-horizontal dt, div#AccountPanel dl.dl-horizontal dt {
+        padding-left: 20px;
+        width: 210px;
+        text-align: right;
+    }
+section#pages a, section#pages a:visited {
+    color: #12354C;
+    font-size: 0.93em;
+    font-weight: 600;
+    overflow: hidden;
+    padding: 15px 10px;
+    height: auto;
+    -webkit-transition: 0.5s background ease;
+    transition: 0.5s background ease;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+    section#pages a:active, section#pages a:hover {
+        color: #0075C1;
+        text-decoration: none;
+        -webkit-transition: 0.5s all ease;
+        transition: all 0.5s ease 0s;
+    }
+
+div#LocationsList > div > div#Search h3, div#VehiclesList > div >div#Search h3 {
+    font-size: 16px;
+    text-align: center;
+    line-break: auto;
+}
+
+div#LocationsList > div > div#Search img, div#VehiclesList > div > div#Search img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+}

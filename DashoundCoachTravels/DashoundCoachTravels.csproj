@@ -240,6 +240,7 @@
     <Compile Include="Models\DBEntities\Location.cs" />
     <Compile Include="Models\DBEntities\Trip.cs" />
     <Compile Include="Models\DBEntities\Trip_Locations.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocationsViewModels.cs" />
     <Compile Include="Models\ManageUsersViewModels.cs" />
@@ -351,6 +352,9 @@
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\Delete.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Home\Destinations.cshtml" />
+    <Content Include="Views\Home\Fleet.cshtml" />
+    <Content Include="Views\Home\Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

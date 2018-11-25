@@ -12,6 +12,7 @@
     <li>
         @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { id="registerLink", title = "Manage" })
     </li>
+    <li id="bookingNavbar">Manage my booking</li>
     <li id="accountNavLine"> | </li>
     <li>
         <a id="LogOff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
@@ -25,8 +26,8 @@ else
     <li>
         <i id="Login" class="fa fa-user loginIcon" aria-hidden="true"></i>
     </li>
-    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li> 
+    <li>@Html.ActionLink("Sign up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li> 
     <li id="accountNavLine"> | </li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 </ul>
 }

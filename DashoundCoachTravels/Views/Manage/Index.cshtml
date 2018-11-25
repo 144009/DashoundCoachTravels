@@ -8,81 +8,85 @@
 <h1>@ViewBag.Title.</h1>
 <p class="text-success">@ViewBag.StatusMessage</p>
 
-<div>
-    @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
-    {
-        <h4>Administrator Panel</h4>
-        <hr />
-    }
-    @if (UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
-    {
-        <h4>Employee Panel</h4>
-        <hr />
-    }
 
-    @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
-    {
-        if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
-        {
-            <dl class="dl-horizontal">
-                <dt>Manage user accounts:</dt>
-                <dd>[@Html.ActionLink("Manage user accounts", "Index", "ManageUsers", routeValues: null, htmlAttributes: new { })]</dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt>Manage vehicles:</dt>
-                <dd>[@Html.ActionLink("Manage avaliable vehicles", "Index", "Coaches", routeValues: null, htmlAttributes: new { })]</dd>
-            </dl>
-            <dl class="dl-horizontal">
-                <dt>Manage locations:</dt>
-                <dd>[@Html.ActionLink("Manage avaliable locations", "Index", "Location", routeValues: null, htmlAttributes: new { })]</dd>
-            </dl>
-        }
-    }
+<section id="pages">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="contents">
+                    <div id="RolePanel">
+                        @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
+                        {
+                            <h4 class="role">Administrator Panel</h4>
+                        }
+                        @if (UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
+                        {
+                            <h4 class="role">Employee Panel</h4>
+                        }
+                        @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
+                        {
+                            if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
+                            {
+                                <dl class="dl-horizontal">
+                                    <dt>Account panel:</dt>
+                                    <dd>[@Html.ActionLink("Manage user accounts", "Index", "ManageUsers", routeValues: null, htmlAttributes: new { })]</dd>
+                                </dl>
+                                <dl class="dl-horizontal">
+                                    <dt>Vehicle panel:</dt>
+                                    <dd>[@Html.ActionLink("Manage avaliable vehicles", "Index", "Coaches", routeValues: null, htmlAttributes: new { })]</dd>
+                                </dl>
+                                <dl class="dl-horizontal">
+                                    <dt>Location panel:</dt>
+                                    <dd>[@Html.ActionLink("Manage avaliable locations", "Index", "Location", routeValues: null, htmlAttributes: new { })]</dd>
+                                </dl>
+                            }
+                        }
+                    </div>
+                    <div id="AccountPanel">
+                        <h4>Basic account info</h4>
+                        <dl class="dl-horizontal">
+                            <dt>User name:</dt>
+                            <dd>@ViewBag.User</dd>
+                            <dt>Email:</dt>
+                            <dd>@ViewBag.Email</dd>
+                            <dt>Name and surname:</dt>
+                            <dd>@ViewBag.Name</dd>
+                            <dt>Location:</dt>
+                            <dd>@ViewBag.CountryTown</dd>
 
-
-    <br />
-    <br />
-    <h4>Basic account info</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>User name:</dt>
-        <dd>@ViewBag.User</dd>
-        <dt>Email:</dt>
-        <dd>@ViewBag.Email</dd>
-        <dt>Name and surname:</dt>
-        <dd>@ViewBag.Name</dd>
-        <dt>Location:</dt>
-        <dd>@ViewBag.CountryTown</dd>
-
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Edit Account details:</dt>
-            <dd>
-                [
-                @Html.ActionLink("Edit your account detials", "EditAccountDetails")
-                ]
-            </dd>
-            <dt>Password:</dt>
-            <dd>
-                [
-                @if (Model.HasPassword)
-                {
-                    @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
-                ]
-            </dd>
-            <dt>External Logins:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
-
+                            <h4>Change your account settings</h4>
+                            <dl class="dl-horizontal">
+                                <dt>Edit Account details:</dt>
+                                <dd>
+                                    [
+                                    @Html.ActionLink("Edit your account detials", "EditAccountDetails")
+                                    ]
+                                </dd>
+                                <dt>Password:</dt>
+                                <dd>
+                                    [
+                                    @if (Model.HasPassword)
+                                    {
+                                        @Html.ActionLink("Change your password", "ChangePassword")
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Create", "SetPassword")
+                                    }
+                                    ]
+                                </dd>
+                                <dt>External Logins:</dt>
+                                <dd>
+                                    @Model.Logins.Count [
+                                    @Html.ActionLink("Manage", "ManageLogins") ]
+                                </dd>
 
 
-        </dl>
-</div>
+
+                            </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

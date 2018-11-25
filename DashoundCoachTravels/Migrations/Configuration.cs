@@ -25,7 +25,7 @@ namespace DashoundCoachTravels.Migrations
 
             // Adding new role types named: Administrator, Employee, User
             if (!roleManager.RoleExists("Administrator")) { roleResult = roleManager.Create(new IdentityRole("Administrator")); }
-            if (!roleManager.RoleExists("Employye")) { roleResult = roleManager.Create(new IdentityRole("Employye")); }
+            if (!roleManager.RoleExists("Employee")) { roleResult = roleManager.Create(new IdentityRole("Employee")); }
             if (!roleManager.RoleExists("User")) { roleResult = roleManager.Create(new IdentityRole("User")); }
             //Adding sample users: 1 for each role type testing only: Basic|Employee|Admin
             var sampleAccount = userManager.FindByEmail("user@gmail.com");
@@ -71,7 +71,7 @@ namespace DashoundCoachTravels.Migrations
                     Country = "Nigeria"
                 };
                 userManager.Create(sampleAccount);
-                userManager.AddToRole(sampleAccount.Id, "User");
+                userManager.AddToRole(sampleAccount.Id, "Employee");
                 context.SaveChanges();
             }
             sampleAccount = userManager.FindByEmail("admin@gmail.com");
