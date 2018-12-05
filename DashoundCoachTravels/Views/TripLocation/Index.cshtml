@@ -1,0 +1,73 @@
+﻿@model DashoundCoachTravels.Models.TripLocationsViewModels
+@{
+    ViewBag.Title = "Manage destinations for";
+}
+<h2>@ViewBag.Title : @Model.TripName</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ListElement.FirstOrDefault().Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListElement.FirstOrDefault().Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListElement.FirstOrDefault().Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListElement.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListElement.FirstOrDefault().Description)
+        </th>
+        <th>
+            Location photo
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.ListElement)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @if (!String.IsNullOrEmpty(item.LocationImage))
+            {
+                <img src="@item.LocationImage" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+            }
+            else
+            {
+                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit") |
+            @Html.ActionLink("Delete", "Delete")
+        </td>
+    </tr>
+    }
+</table>
+
+<a href="@Url.Action("Add", new { thisTripId = Model.Id_Trip })" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Add a destination
+</a>
+<a href="@Url.Action("Edit", "Trip", new { thisTripId = Model.Id_Trip })" class="btn btn-default">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    Back to trip edit menu
+</a>
+

@@ -51,6 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                     @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
                     {
                         <span class="icon-bar"></span>
@@ -59,11 +60,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" id="navMenu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li><a href="@Url.Action("Index","Home","Home")"><i id="homeIcon" class="fa fa-home"></i></a></li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Destinations", "Destinations", "Home")</li>
                     <li>@Html.ActionLink("Our fleet", "Fleet", "Home")</li>
+                    <li>@Html.ActionLink("Trips", "Index", "Trip")</li>
                     @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
                     {
                         <li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
@@ -182,7 +184,7 @@ Całość sie wykona tylko, jeśli szerokość okna jest większa niż 764px
                 if ($(document).scrollTop() > 73) {
                     if ($('#navigationBar').data('size') == 'big') {
                         $('#navigationBar').data('size', 'small');
-                        $('div#tlo').stop().css({ 'margin-bottom': '60px' });
+                        $('div#tlo').stop().css({ 'margin-bottom': '54px' });
                         $('#navigationBar').stop().css({ 'position': 'fixed', 'z-index': '9999', 'width': '100%' });
                         $('#navigationBar').stop().css({ 'top': '0px' });
                     }

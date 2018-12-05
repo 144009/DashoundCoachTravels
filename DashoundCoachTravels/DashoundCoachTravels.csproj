@@ -198,6 +198,8 @@
     <Compile Include="Controllers\CoachesController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManageUsersController.cs" />
+    <Compile Include="Controllers\TripController.cs" />
+    <Compile Include="Controllers\TripLocationController.cs" />
     <Compile Include="Controllers\UserRoleHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -232,6 +234,10 @@
     <Compile Include="Migrations\201811201326294_Table_Locations_newentries.Designer.cs">
       <DependentUpon>201811201326294_Table_Locations_newentries.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812032042352_TripTable_unifiedBannerField.cs" />
+    <Compile Include="Migrations\201812032042352_TripTable_unifiedBannerField.Designer.cs">
+      <DependentUpon>201812032042352_TripTable_unifiedBannerField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CoachesViewModels.cs" />
@@ -245,6 +251,8 @@
     <Compile Include="Models\LocationsViewModels.cs" />
     <Compile Include="Models\ManageUsersViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TripLocationsViewModels.cs" />
+    <Compile Include="Models\TripsViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -259,8 +267,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="media\background.jpg" />
     <Content Include="media\CompanyLogo.png" />
     <Content Include="media\default.jpg" />
+    <Content Include="media\Home\banner1.svg" />
+    <Content Include="media\Home\banner2.svg" />
+    <Content Include="media\Home\banner3.svg" />
     <Content Include="media\Location\320x160 jpg.txt" />
     <Content Include="media\Location\Type1.jpg" />
     <Content Include="media\Location\Type2.jpg" />
@@ -355,6 +367,12 @@
     <Content Include="Views\Home\Destinations.cshtml" />
     <Content Include="Views\Home\Fleet.cshtml" />
     <Content Include="Views\Home\Statistics.cshtml" />
+    <Content Include="Views\Trip\Index.cshtml" />
+    <Content Include="Views\Trip\Create.cshtml" />
+    <Content Include="Views\TripLocation\Index.cshtml" />
+    <Content Include="Views\TripLocation\Add.cshtml" />
+    <Content Include="Views\Trip\Edit.cshtml" />
+    <Content Include="Views\Trip\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811201326294_Table_Locations_newentries.resx">
       <DependentUpon>201811201326294_Table_Locations_newentries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812032042352_TripTable_unifiedBannerField.resx">
+      <DependentUpon>201812032042352_TripTable_unifiedBannerField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
