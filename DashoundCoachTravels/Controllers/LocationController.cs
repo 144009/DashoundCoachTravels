@@ -31,11 +31,6 @@ namespace DashoundCoachTravels.Controllers
             LocationsViewModels model = new LocationsViewModels();
 
             var list = new List<Location>();
-
-            if (model.Country == null) model.Country = "";
-            if (model.Town == null) model.Town = "";
-            if (model.Name == null) model.Name = "";
-
             foreach (var item in dbcontext.Locations.ToList())
             {
                 list.Add(item);

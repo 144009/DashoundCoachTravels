@@ -1,0 +1,171 @@
+﻿@model DashoundCoachTravels.Models.ViewEditTripsViewModel
+@using DashoundCoachTravels.Helpers
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = Model.TripInstance.Name;
+}
+
+@if (!String.IsNullOrEmpty(Model.TripInstance.Banner))
+{
+    <img src="@Model.TripInstance.Banner" alt="Banner">
+}
+
+@if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
+{
+    <br />
+    <br />
+    <div class="panel panel-info">
+        <div class="panel-heading">Manage trip</div>
+        <div class="panel-body">
+            <p>
+                Number of reservations: @Model.NumberOfReservations
+                <br />
+                @if (Model.NumberOfReservations == 0)
+                {
+                    <br />
+                    <a href="@Url.Action("Edit", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        Edit
+                    </a>
+                    <a href="@Url.Action("Delete", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        Delete
+                    </a>
+                }
+                else
+                {
+                <p class="text-danger">Cannot edit a trip that has active reservations!</p>
+            }
+                </p>
+            </div>
+        </div>
+    }
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row" width="100%">
+    <div class="col-md-4">
+        <h4>Date</h4>
+        <h5>@Model.TripInstance.DateDeparture.ToString("d") - @Model.TripInstance.DateBack.ToString("d")</h5>
+    </div>
+
+    <div class="col-md-4">
+        <h4>Spots booked</h4>
+        <h5>@Model.NumSpotsLeft.ToString() / @Model.TripInstance.NumSpots.ToString()</h5>
+    </div>
+
+    <div class="col-md-4" align="right">
+        <a href="@Url.Action("Book", new { id = Model.TripInstance.Id })" class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            @Model.TripInstance.Price.ToString() PLN - Book!
+        </a>
+    </div>
+</div>
+
+@if (!String.IsNullOrEmpty(Model.TripInstance.Description))
+{
+    <h3>Description</h3>
+    @Html.DisplayFor(model => model.TripInstance.Description)
+}
+
+<h3>Coach</h3>
+<h4>Model:</h4><h5>@Model.CoachModel</h5>
+<h4>Photo:</h4><h5>
+    @if (!String.IsNullOrEmpty(Model.CoachBanner))
+    {
+        <img src="@Model.CoachBanner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+    }
+    else
+    {
+        <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+    }
+</h5>
+
+@if (Model.Route.ListElement != null)
+{
+    <h3>Sightseeing plan</h3>
+    <ul class="list-group">
+        @if (Model.Route.ListElement != null)
+        {
+            int n = 0;
+            foreach (var location in Model.Route.ListElement)
+            {
+                ++n;
+                <li class="list-group-item">@n.ToString(). @location.Name, @location.Town, @location.Country</li>
+            }
+        }
+    </ul>
+
+    <h3>Trip route on map</h3>
+   @* <img src="@("http://maps.google.com/maps/api/staticmap?size=640x320&scale=2&maptype=roadmap" + ViewBag.MapMarkers + "&key=YOUR_API_KEY")" class="img-responsive" alt="GoogleMap" width="1280" height="640"> *@
+    <img src="~/Media/sampleMap.jpg" class="img-responsive" alt="GoogleMap" width="1280" height="640">
+}
+else
+{
+    <br />
+}
+<br />
+<p>
+
+    <a href="@Url.Action("Index")" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+        Back to list
+
+    </a>
+</p>
+
+
+
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<script>
+
+    var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+    var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+
+    // remaining is the same as in the docs, accept for the var instead of const declarations
+    var provider = new OpenStreetMapProvider();
+
+    var searchControl = new GeoSearchControl({
+        provider: provider
+            .search('Rome', function (data) {
+                console.log(data)
+            }),
+        showMarker: true,                                   // optional: true|false  - default true
+        showPopup: true,                                   // optional: true|false  - default false
+        marker: {                                           // optional: L.Marker    - default L.Icon.Default
+            icon: new L.Icon.Default(),
+            draggable: false,
+        },
+        popupFormat: ({ query, result }) => result.label,   // optional: function    - default returns result label
+        maxMarkers: 1,                                      // optional: number      - default 1
+        retainZoomLevel: false,                             // optional: true|false  - default false
+        animateZoom: true,                                  // optional: true|false  - default true
+        autoClose: false,                                   // optional: true|false  - default false
+        searchLabel: 'Enter address',                       // optional: string      - default 'Enter address'
+        keepResult: false                                   // optional: true|false  - default false
+    });
+
+
+    // https://wiki.openstreetmap.org/wiki/Deploying_your_own_Slippy_Map
+    // https://switch2osm.org/using-tiles/getting-started-with-leaflet/
+
+    // set up the map
+    var map = new L.Map('mapid');
+
+    // create the tile layer with correct attribution
+    var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+    var osm = new L.TileLayer(osmUrl, { minZoom: 8, maxZoom: 12, attribution: osmAttrib });
+
+
+
+    // start the map in South-East England
+    map.setView(new L.LatLng(51.3, 0.7), 9);
+    var marker = L.marker([51.5, -0.09]).addTo(map);
+    map.addControl(searchControl);
+    map.addLayer(osm);
+
+ 
+
+</script>

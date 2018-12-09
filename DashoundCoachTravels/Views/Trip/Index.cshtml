@@ -2,6 +2,9 @@
 @using DashoundCoachTravels.Helpers
 @using Microsoft.AspNet.Identity
 
+@using PagedList.Mvc; @*import this so we get our HTML Helper*@
+@using PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+
 @{
     ViewBag.Title = "Our trip offer";
 }
@@ -63,6 +66,8 @@
 
                     }
 
+                    @Html.PagedListPager((IPagedList)Model.List, page => Url.Action("Index", new { page }))
+
                     <div class="form-group">
                         @foreach (var item in Model.List)
                         {
@@ -115,7 +120,7 @@
                                     <i>Date:</i>
                                     <b>@item.TripInstance.DateDeparture.ToShortDateString()</b> - <b>@item.TripInstance.DateBack.ToShortDateString()</b>
                                     <i>Transport:</i>
-                                    <b>@item.TripInstance.CoachNumberId</b>
+                                    <b>@item.CoachModel</b>@*was @item.TripInstance.CoachNumberId*@
                                     <i>Spots booked:</i>
                                     <b>@item.NumSpotsLeft</b> / <b>@item.TripInstance.NumSpots</b>
                                     @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
@@ -128,35 +133,38 @@
                                         }
                                         else
                                         {
-                                        <i class="text-danger">Cannot edit a trip that has active reservations!</i>
+                                            <i class="text-danger">Cannot edit a trip that has active reservations!</i>
                                         }
                                         <i>Manage:</i>
                                         <b>
-                                            <a href="@Url.Action("Edit", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">Edit
-                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            <a href="@Url.Action("Edit", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">
+                                                Edit
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                             </a>
                                         </b>
                                         <b>
-                                            <a href="@Url.Action("Delete", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">Delete
+                                            <a href="@Url.Action("Delete", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">
+                                                Delete
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </b>
                                     }
-                                    </div>
+                                </div>
 
                                 <div class="searchSeeBtn">
                                     <div class="code">
                                         Offer number:
                                         @item.TripInstance.Id
                                     </div>
-                                    <a href="@Url.Action("Details", new { id = item.TripInstance.Id })" class="btn btn-warning btn-lg">
+                                    <a href="@Url.Action("Details", new { thisTripId = item.TripInstance.Id })" class="btn btn-warning btn-lg">
                                         <span class="glyphicon glyphicon-globe" aria-hidden="true">Details</span>
                                     </a>
                                 </div>
                             </div>
                         }
                     </div>
-                 </div>
+                    @Html.PagedListPager((IPagedList)Model.List, page => Url.Action("Index", new { page }))
+                </div>
             </div>
         </div>
     </div>

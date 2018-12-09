@@ -28,27 +28,40 @@
         <th>
             @Html.DisplayNameFor(model => model.List.FirstOrDefault().Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationImage)
+        </th>
         <th></th>
     </tr>
     @foreach (var item in Model.List)
     {
-        <tr class="Search" id="Search">
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Town)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Add", "Add", new { thisTripId = Model.TripId, thisLocationId = item.Id })
-            </td>
-        </tr>
+    <tr class="Search" id="Search">
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @if (!String.IsNullOrEmpty(item.LocationImage))
+            {
+                <img src="@item.LocationImage" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+            }
+            else
+            {
+                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Add", "Add", new { thisTripId = Model.TripId, thisLocationId = item.Id })
+        </td>
+    </tr>
     }
 </table>
 <hr />

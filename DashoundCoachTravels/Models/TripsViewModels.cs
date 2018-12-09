@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DashoundCoachTravels.Models
 {
@@ -62,6 +63,7 @@ namespace DashoundCoachTravels.Models
         public string CoachBanner { get; set; }
 
         public IEnumerable<ViewEditTripsViewModel> List { get; set; } // to create a list of results for price search
+
     }
     public class ViewEditTripsViewModel
     {
@@ -73,8 +75,16 @@ namespace DashoundCoachTravels.Models
         [Display(Name = "Number of spots left in trip")]
         public int NumSpotsLeft { get; set; }
 
+        [Display(Name = "Coach Vehicle Number")]
+        public string CoachModel { get; set; }
+
+        [Display(Name = "Coach Vehicle Banner")]
+        public string CoachBanner { get; set; }
+
         [Display(Name = "Route")]
         public TripLocationsViewModels Route { get; set; }
+
+        public IEnumerable<SelectListItem> CoachVehicleIdList { get; set; }
     }
 
 

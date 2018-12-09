@@ -2,6 +2,7 @@
 using DashoundCoachTravels.Models;
 using DashoundCoachTravels.Models.DBEntities;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace DashoundCoachTravels.Controllers
         private ApplicationDbContext dbcontext = new ApplicationDbContext();
 
         // GET: Trip
-        public ActionResult Index(float? PriceMax, float?PriceMin, ManageMessageId? message)
+        public ActionResult Index(float? PriceMax, float?PriceMin, ManageMessageId? message, int? page)
         {
             ViewBag.StatusMessage =
             message == ManageMessageId.EditDetailsSuccess ? "All changes have been saved."
@@ -27,6 +28,11 @@ namespace DashoundCoachTravels.Controllers
             : message == ManageMessageId.Error ? "An error has occurred."
             : message == ManageMessageId.CannotEditEntry ? "There are reservations made for this trip. Cannot edit."
             : "";
+
+
+            // tutorial used: https://github.com/TroyGoode/PagedList
+            var pageIndex = (page ?? 1); // first page index. Must start at least at 1
+            var pageSize = 8;  // objects per page
 
 
             //setting default values of fields for search. Those options will be used to search by if empty
@@ -78,26 +84,105 @@ namespace DashoundCoachTravels.Controllers
                     route.TripName = trip.Name;
 
                     model_list.Add(new ViewEditTripsViewModel { TripInstance = trip, Route = route });
+
                 }
             }
-            model.List = model_list; 
 
+
+            model.List = model_list; 
             foreach(var trip in model.List)
             {
                 //return free spots left FOR NOW STATIC VALUES. Bookings controller is not implemented 
-                trip.NumSpotsLeft = model.NumSpots;
+                trip.NumSpotsLeft = countFreeSpots(trip.TripInstance.Id);
                 //return number of reservations
-                trip.NumberOfReservations = 0;
+                trip.NumberOfReservations = countReservavtionsMade(trip.TripInstance.Id);
             }
+
+            // add coach info to List
+            foreach(var trip in model.List)
+            {
+                foreach (var item in dbcontext.Coaches.ToList())
+                {
+                    if (trip.TripInstance.CoachNumberId == item.Id)
+                    {
+                        trip.CoachBanner = item.VehScreenshot;
+                        trip.CoachModel = item.Brand + " " + item.VehModel + " - no." + item.VehicleNumber;
+                    }
+                }
+            }
+
+
+            // convert normal list to a pagedlist with given index and size
+            model.List = model.List.ToPagedList(pageIndex, pageSize);
 
             return View(model);
         }
 
         // GET: Trip/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? thisTripId)
         {
-            return View();
-        }
+            if (thisTripId == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            // ViewBag value for holding part of google maps url data string
+            ViewBag.Markers = "";
+            string[] colours = { "red", "green", "blue"};
+
+
+            Trip trip = dbcontext.Trips.Find(thisTripId);
+            if(trip == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            ViewEditTripsViewModel model = new ViewEditTripsViewModel();
+            model.TripInstance = trip;
+
+            var list = new List<TripLocationsInstanceViewModels>();
+            int i = 0;
+            foreach (var item in dbcontext.Trip_Locations.ToList())
+            {
+                if (item.Id_Trip == thisTripId)
+                {
+                    foreach (var location in dbcontext.Locations.ToList())
+                    {
+                        if (item.Id_Location == location.Id)
+                        {
+                            // Create a marker string using current location data; can be modified for any url string if needed depending on map provider
+                            ++i;
+                            ViewBag.Markers += "&markers=color:" + colours[(i - 1) % 3] + "|label:" + i.ToString() + "|" + location.Name + "," + location.Town + "," + location.Country;
+                            // ********************
+                            list.Add(new TripLocationsInstanceViewModels
+                            {
+                                Country = location.Country,
+                                Town = location.Town,
+                                Name = location.Name,
+                                Description = location.Description,
+                                LocationImage = location.LocationImage,
+                                Number = item.Number,
+                                RouteInstanceId = item.Id
+                            });
+                        }
+                    }
+                }
+            }
+            model.Route = new TripLocationsViewModels();
+            if (list.Count() > 0) model.Route.ListElement = list;
+            if (thisTripId != null && dbcontext.Trips.Find(thisTripId) != null) model.Route.Id_Trip = (int)thisTripId;
+
+
+            //return free spots left FOR NOW STATIC VALUES. Bookings controller is not implemented 
+            model.NumSpotsLeft = countFreeSpots((int)thisTripId);
+            //return number of reservations
+            model.NumberOfReservations = countReservavtionsMade((int)thisTripId);
+
+            // add coach info to List
+            foreach (var item in dbcontext.Coaches.ToList())
+            {
+                if (trip.CoachNumberId == item.Id)
+                {
+                    model.CoachBanner = item.VehScreenshot;
+                    model.CoachModel = item.Brand + " " + item.VehModel + " - no." + item.VehicleNumber;
+                }
+            }
+
+            return View(model);
+            }
 
         // GET: Trip/Create
         public ActionResult Create()
@@ -122,6 +207,8 @@ namespace DashoundCoachTravels.Controllers
                 }
             if (ModelState.IsValid)
             {
+                model.CoachNumberId = -1;
+
                 dbcontext.Trips.Add(model);
                 dbcontext.SaveChanges();
                 return RedirectToAction("Index", new { Message = ManageMessageId.CreateEntrySuccess });
@@ -143,7 +230,7 @@ namespace DashoundCoachTravels.Controllers
                 }
 
             //check for reservations. Cannot edit while there are any. Placeholder 
-            int NumberOfReservations = 0;
+            int NumberOfReservations = countReservavtionsMade((int)thisTripId);
             if (NumberOfReservations > 0)
                 return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
@@ -183,6 +270,24 @@ namespace DashoundCoachTravels.Controllers
             if (list.Count() > 0) model.Route.ListElement = list;
             if (thisTripId != null && dbcontext.Trips.Find(thisTripId) != null) model.Route.Id_Trip = (int)thisTripId;
 
+            // list that has every coach in database
+            var listOfCoaches = dbcontext.Coaches.ToList();
+
+            var currDate = DateTime.Now;
+            foreach (var coach in dbcontext.Coaches.ToList())
+            {
+                foreach (var tripInstance in dbcontext.Trips.ToList())
+                {
+                    if (tripInstance.DateDeparture < model.TripInstance.DateDeparture && model.TripInstance.DateDeparture < tripInstance.DateBack)
+                        if(coach.Id == tripInstance.CoachNumberId)
+                            {
+                                listOfCoaches.Remove(coach);
+                            }
+                }
+            }
+
+            model.CoachVehicleIdList = new SelectList(listOfCoaches, "Id", "VehicleNumber");
+
             return View(model);
         }
 
@@ -195,7 +300,7 @@ namespace DashoundCoachTravels.Controllers
                 return RedirectToAction("AccessDenied", "Manage");
             }
             //check for reservations. Cannot edit while there are any. Placeholder 
-            int NumberOfReservations = 0;
+            int NumberOfReservations = countReservavtionsMade((int)thisTripId);
             if (NumberOfReservations > 0)
                 return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
@@ -234,7 +339,7 @@ namespace DashoundCoachTravels.Controllers
                 }
 
             //check for reservations. Cannot edit while there are any. Placeholder 
-            int NumberOfReservations = 0;
+            int NumberOfReservations = countReservavtionsMade((int)thisTripId);
             if (NumberOfReservations > 0)
                 return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
@@ -255,7 +360,7 @@ namespace DashoundCoachTravels.Controllers
                 }
 
             //check for reservations. Cannot edit while there are any. Placeholder 
-            int NumberOfReservations = 0;
+            int NumberOfReservations = countReservavtionsMade((int)thisTripId);
             if (NumberOfReservations > 0)
                 return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
@@ -276,6 +381,29 @@ namespace DashoundCoachTravels.Controllers
             BookEntrySuccess,
             CannotEditEntry,
             Error
+        }
+
+        // functions counting number of reservatons and number of reserved spots in a given trip
+        private int countFreeSpots(int thisTripId)
+        {
+            Trip trip = dbcontext.Trips.Find(thisTripId);
+            int spotsReservedTotal = 0;
+            foreach (var item in dbcontext.Reservations.ToList())
+            {
+                if (item.Id_Trip == trip.Id) spotsReservedTotal += item.NumPeople; // eg 22
+            }
+            return spotsReservedTotal; 
+        }
+
+        private int countReservavtionsMade(int thisTripId)
+        {
+            Trip trip = dbcontext.Trips.Find(thisTripId);
+            int reservationsMade = 0;
+            foreach (var item in dbcontext.Reservations.ToList())
+            {
+                if (item.Id_Trip == trip.Id) reservationsMade++;
+            }
+            return reservationsMade;
         }
 
         #endregion

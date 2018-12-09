@@ -1,4 +1,5 @@
 ﻿using DashoundCoachTravels.Models.DBEntities;
+using DotNet.Highcharts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -45,6 +46,12 @@ namespace DashoundCoachTravels.Models
         [Display(Name = "Number of trips")]
         public int TotalTrips { get; set; }
 
+        [Display(Name = "Number of trips that are yet to end")]
+        public int TotalActiveTrips { get; set; }
+
+        [Display(Name = "Number of spots in all trips")]
+        public int TotalTripsSpots { get; set; }
+
         [DataType(DataType.Currency)]
         [Display(Name = "Average prce of a trip")]
         public float AvgTripPrice { get; set; }
@@ -52,18 +59,25 @@ namespace DashoundCoachTravels.Models
         [Display(Name = "Average trip spots")]
         public int AvgTripSpots { get; set; }
 
+        [Display(Name = "Number of spots reserved for trips")]
+        public int TotalReservationSpotsBooked { get; set; }
+
+        [Display(Name = "Average % of spots reserved in total")]
+        public int AvgTotalSpotsReserved { get; set; }
+
         [Display(Name = "Number of reservations")]
-        public int TotalReservations { get; set; }
+        public int TotalTripsBooked { get; set; }
 
         [Display(Name = "Number of reservations in last month")]
-        public int TotalReservationsMonth { get; set; }
+        public int TotalReservationsLastMonth { get; set; }
 
         [Display(Name = "Number of reservations in last year")]
-        public List<ReservationsPerMonthYear> ReservationsPerMonthYears { get; set; }
+        public List<ReservationsInMonth> ReservationsPerMonth { get; set; }
 
+        public Highcharts ReservationChart { get; set; }
     }
 
-    public class ReservationsPerMonthYear
+    public class ReservationsInMonth
     {
         [Display(Name = "Year")]
         public int Year { get; set; }

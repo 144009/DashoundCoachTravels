@@ -31,10 +31,6 @@ namespace DashoundCoachTravels.Controllers
             CoachesViewModels model = new CoachesViewModels();
 
             var list = new List<Coach>();
-
-            if (model.Brand == null) model.Brand = "";
-            if (model.VehModel == null) model.VehModel = "";
-
             foreach (var item in dbcontext.Coaches.ToList())
             {
                list.Add(item);

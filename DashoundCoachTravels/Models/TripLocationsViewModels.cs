@@ -70,4 +70,29 @@ namespace DashoundCoachTravels.Models
 
         public int TripId { get; set; }
     }
+
+    public class DeleteTripLocationsViewModel
+    { 
+        [StringLength(100)]
+        [Display(Name = "Country")]
+        public string Country { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "Town")]
+        public string Town { get; set; }
+
+        [StringLength(100)]
+        [Display(Name = "Place Name")]
+        public string Name { get; set; } // example: Colosseum 
+
+        [Display(Name = "Location Photo (optional)")]
+        public string LocationImage { get; set; }
+
+        public int TripId { get; set; }
+
+        [DisplayFormat(NullDisplayText = "-")]
+        [Display(Name = "Place Description")]
+        public string Description { get; set; }
+    }
+
 }

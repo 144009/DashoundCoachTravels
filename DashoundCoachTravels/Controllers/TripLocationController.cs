@@ -136,24 +136,57 @@ namespace DashoundCoachTravels.Controllers
         }
 
         // GET: TripLocation/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? thisSublocationId)
         {
-            return View();
+            if(thisSublocationId == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Trip_Locations thisRoute = dbcontext.Trip_Locations.Find(thisSublocationId);
+            if (thisRoute == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            DeleteTripLocationsViewModel model = new DeleteTripLocationsViewModel();
+            Location location = dbcontext.Locations.Find(thisRoute.Id_Location);
+
+            model.TripId = thisRoute.Id_Trip;
+            model.Town = location.Town;
+            model.Country = location.Country;
+            model.Name = location.Name;
+            model.Description = location.Description;
+            model.LocationImage = location.LocationImage;
+
+
+            return View(model);
         }
 
         // POST: TripLocation/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int? thisSublocationId, FormCollection collection)
         {
+            if (thisSublocationId == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             try
             {
-                // TODO: Add delete logic here
+                Trip_Locations thisRoute = dbcontext.Trip_Locations.Find(thisSublocationId);
+                if (thisRoute == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                return RedirectToAction("Index");
+                bool isDeleted = false;
+                Trip_Locations deletedItem = new Trip_Locations();
+
+                foreach (var item in dbcontext.Trip_Locations.ToList())
+                {
+                    if (isDeleted && item.Id_Trip == thisRoute.Id_Trip) item.Number--;
+                    if(item.Id == thisSublocationId)
+                    {
+                        deletedItem = item;
+                        isDeleted = true;
+                    }
+                }
+                dbcontext.Trip_Locations.Remove(deletedItem);
+                dbcontext.SaveChanges();
+
+                return RedirectToAction("Index", new { thisTripId = thisRoute.Id_Trip, Message = ManageMessageId.DeleteEntrySuccess });
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
 
