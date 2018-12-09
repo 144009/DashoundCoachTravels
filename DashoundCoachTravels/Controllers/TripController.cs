@@ -229,7 +229,7 @@ namespace DashoundCoachTravels.Controllers
                     return RedirectToAction("AccessDenied", "Manage");
                 }
 
-            //check for reservations. Cannot edit while there are any. Placeholder 
+            //check for reservations. Cannot edit while there are any. 
             int NumberOfReservations = countReservavtionsMade((int)thisTripId);
             if (NumberOfReservations > 0)
                 return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
