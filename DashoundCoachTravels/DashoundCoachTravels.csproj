@@ -280,6 +280,7 @@
     <Content Include="media\background.jpg" />
     <Content Include="media\CompanyLogo.png" />
     <Content Include="media\default.jpg" />
+    <Content Include="media\favicon.ICO" />
     <Content Include="media\Home\Slide1.jpg" />
     <Content Include="media\Home\Slide2.jpg" />
     <Content Include="media\Home\Slide3.jpg" />

@@ -835,3 +835,121 @@ div.offerDescription {
 div#mainOffer {
     background: rgba(255,255,255,.6);
 }
+
+
+/*MEDIA responsive CSS section*/
+/*only for main page DONE: min-360px width*/ 
+@media (max-width: 767px) {
+    div#accountNav {
+        font-size: 18px;
+    }
+    div#homepageSearch {
+        font-size: 10px;
+    }
+    div#homepageSearch-inner {
+        margin-bottom: 110px;
+    }
+    div#tlo a#header {
+        width: 90%;
+    }
+
+        div#tlo a#header img {
+            width: 40%;
+        }
+
+    .nav > li {
+        display: table-cell;
+    }
+
+    form#logoutForm.navbar-right {
+        width: 100%;
+    }
+
+    div#homepageSearchBox-main {
+        width: 80%;
+        display: flex;
+        margin: 0 auto;
+        position: relative;
+        transition: ease all .3s;
+        background: #212121;
+        padding-left: 6%;
+    }
+
+    div#homepageSearchField {
+        width: 37%;
+        display: inline-block;
+    }
+
+    button#homepageSearchButton {
+        width: 100%;
+        display: inline;
+        height: 64px;
+        position: relative;
+        border: 0;
+    }
+
+    div#homepageTrips {
+        font-size: 13px;
+    }
+        div#homepageTrips > div > p {
+            width: 90%;
+            margin-left: 17px;
+        }
+
+    .scrollToTop {
+        width: 16%;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 992px) {
+    div#tlo a#header {
+        width: 50%;
+    }
+        div#tlo a#header img {
+            width: 50%;
+        }
+    .nav > li {
+        display: table-cell;
+    }
+    form#logoutForm.navbar-right {
+        width: 100%;
+    }
+    div#homepageSearchBox-main {
+        width: 80%;
+        display: flex;
+        margin: 0 auto;
+        position: relative;
+        transition: ease all .3s;
+        background: #212121;
+        padding-left: 6%;
+    }
+    div#homepageSearchField {
+        width: 37%;
+        display: inline-block;
+    }
+    button#homepageSearchButton {
+        width: 100%;
+        display: inline;
+        height: 64px;
+        position: relative;
+        border: 0;
+    }
+    div#homepageTrips {
+        font-size: 16px;
+    }
+    .scrollToTop {
+        width: 7%;
+    }
+}
+
+/*done*/@media (min-width: 992px) and (max-width: 1200px) {
+
+}
+
+/*done*/@media (min-width: 1200px) and (max-width: 1366px) {
+
+}
+
+/*done*/@media (min-width: 1366px) and (max-width: 1920px) {
+
+}
