@@ -1,19 +1,18 @@
 ﻿@model DashoundCoachTravels.Models.IndexViewModel
 @using DashoundCoachTravels.Helpers
 @using Microsoft.AspNet.Identity
-@{
-    ViewBag.Title = "Manage account";
-}
 
-<h1>@ViewBag.Title.</h1>
-<p class="text-success">@ViewBag.StatusMessage</p>
 
+<div id="SubPagesTitle">
+    <h1>Manage</h1>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+</div>
 
 <section id="pages">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="contents">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
                     <div id="RolePanel">
                         @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
                         {
@@ -40,6 +39,10 @@
                                     <dd>[@Html.ActionLink("Manage avaliable locations", "Index", "Location", routeValues: null, htmlAttributes: new { })]</dd>
                                 </dl>
                             }
+                                <dl class="dl-horizontal">
+                                    <dt>Trip panel:</dt>
+                                    <dd>[@Html.ActionLink("Manage avaliable trips", "Index", "Trip", routeValues: null, htmlAttributes: new { })]</dd>
+                                </dl>
                         }
                     </div>
                     <div id="AccountPanel">
@@ -75,14 +78,6 @@
                                     }
                                     ]
                                 </dd>
-                                <dt>External Logins:</dt>
-                                <dd>
-                                    @Model.Logins.Count [
-                                    @Html.ActionLink("Manage", "ManageLogins") ]
-                                </dd>
-
-
-
                             </dl>
                     </div>
                 </div>

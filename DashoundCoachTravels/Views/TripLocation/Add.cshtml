@@ -1,76 +1,97 @@
 ﻿@model DashoundCoachTravels.Models.AddTripLocationsViewModel
-@{
-    ViewBag.Title = "Add a new destination point";
-}
-<h2>@ViewBag.Title</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
 
-<div class="container">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Location name" class="form-control" />
+<div id="SubPagesTitle">
+    <h1>Add a new destination point</h1>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div id="SubpagesSearchBox">
+        <div id="SubpagesSearchBox-inner" class="row">
+            <div id="SubpagesSearchBox-main" class="row">
+                <div class="col-sm-6" id="homepageSearchField">
+                    <p>
+                        Location Name
+                    </p>
+                    <input type="text" id="Search" placeholder="Location name" class="form-control" /> <br />
+                </div>
+                <div>
+                    <button id="SubpagesSearchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="SubpagesAdminButtons">
+        <div style="font-weight:bold; font-size:16px;">
+            <a href="@Url.Action("Index", new { thisTripId = Model.TripId })" class="btn btn-default">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                Back to list
+            </a>
         </div>
     </div>
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Town)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.List.FirstOrDefault().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocationImage)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.List)
-    {
-    <tr class="Search" id="Search">
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Town)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @if (!String.IsNullOrEmpty(item.LocationImage))
-            {
-                <img src="@item.LocationImage" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-            }
-            else
-            {
-                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Add", "Add", new { thisTripId = Model.TripId, thisLocationId = item.Id })
-        </td>
-    </tr>
-    }
-</table>
-<hr />
-<p>
-    <a href="@Url.Action("Index", new { thisTripId = Model.TripId })" class="btn btn-default">
-        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-        Back to list
-    </a>
-</p>
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    <table class="table-responsive table-striped" id="SubpagesTableList">
+                        <thead id="SubpagesTableList">
+                            <tr id="SubpagesTableList-head">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Country)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Town)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.List.FirstOrDefault().Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LocationImage)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="SubpagesTableList">
+                            @foreach (var item in Model.List)
+                            {
+                                <tr class="Search" id="Search">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Country)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Town)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @if (!String.IsNullOrEmpty(item.LocationImage))
+                                        {
+                                            <img src="@item.LocationImage" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Add", "Add", new { thisTripId = Model.TripId, thisLocationId = item.Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script type="text/javascript">
     $(document).ready(function () {

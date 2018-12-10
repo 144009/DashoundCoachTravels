@@ -72,109 +72,85 @@
 
 <!--END OF SLIDER-->
 <!-- SEARCH BY MAX PRICE and link to trip index page-->
-@using (Html.BeginForm("Index", "Trip", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
+<div id="homepageSearch">
+    @using (Html.BeginForm("Index", "Trip", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-search">
-        <hr />
-        <div class="row">
-            <div class="col-sm-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PriceMin, htmlAttributes: new { @class = "control-label" })
-
+        <div id="homepageSearch-inner" class="form-search">
+            <div id="homepageSearchBox-main" class="row">
+                <div class="col-sm-5" id="homepageSearchField">
+                    <p>
+                        Minimum price
+                    </p>
                     @Html.EditorFor(model => model.PriceMin, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PriceMin, "", new { @class = "text-danger" })
                 </div>
-            </div>
-
-            <div class="col-sm-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PriceMax, htmlAttributes: new { @class = "control-label" })
-
+                <div class="col-sm-5" id="homepageSearchField">
+                    <p>
+                        Maximum price
+                    </p>
                     @Html.EditorFor(model => model.PriceMax, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PriceMax, "", new { @class = "text-danger" })
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-4">
-                    <br />
-                    <button type="submit" class="btn btn-default">
-                        <i class="glyphicon glyphicon-search"></i> Search
-                    </button>
-
-
+                <div>
+                    <button id="homepageSearchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
+
+
 
 <!--END OF SEARCH PART-->
 <!--SHOW 6 closest trips-->
-<h2>Coming up</h2>
-<div><p>Want to go on a trip as soon as possible? Here are 6 trips that are coming soon!</p></div>
-@if (Model.List != null)
-{
+
+<div id="homepageTrips">
     <div class="row">
-        @foreach (var item in Model.List)
-        {
-            <div class="col-sm-6 col-md-4" id="homepage-offers-col">
-                <div class="homepage-offers-col">
-                    <div class="homepage-image">
-                        @if (!String.IsNullOrEmpty(item.TripInstance.Banner))
-                        {
-                            <img src="@item.TripInstance.Banner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-                        }
-                        else
-                        {
-                            <img src="~/Media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-                        }
-                    </div>
-                    <div class="offersContainer">
-                        <div class="homepageOfferDestination-container">
-                            <div class="homepageOfferDestination">
-                                <div class="homepageOfferNAME">@item.TripInstance.Name</div>
-                                <a href="@Url.Action("Details","Trip", new {thisTripId=item.TripInstance.Id})" class="btn btn-warning">
-                                    View offer
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                                </a>
-                            </div>
+        <h2>Coming up</h2>
+        <p>Want to go on a trip as soon as possible? Here are 6 trips that are coming soon!</p>
+    </div>
+    @if (Model.List != null)
+    {
+        <div class="row">
+            @foreach (var item in Model.List)
+            {
+                <div class="col-sm-6 col-md-4" id="homepage-offers-col">
+                    <div class="homepage-offers-col">
+                        <div class="homepage-image">
+                            @if (!String.IsNullOrEmpty(item.TripInstance.Banner))
+                            {
+                                <img src="@item.TripInstance.Banner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                            }
+                            else
+                            {
+                                <img src="~/Media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                            }
                         </div>
-                        <div class="homepageOfferInformation-container">
-                            <div class="homepageOfferInformation">
-                                <div class="homepageOfferDesc">@item.TripInstance.Description</div>
-                                <div class="homepageOfferTerm">@item.TripInstance.DateDeparture.ToShortDateString() - @item.TripInstance.DateBack.ToShortDateString()</div>
-                                <div class="homepageOfferPrice">from @item.TripInstance.Price PLN</div>
+                        <div class="offersContainer">
+                            <div class="homepageOfferDestination-container">
+                                <div class="homepageOfferDestination">
+                                    <div class="homepageOfferNAME">@item.TripInstance.Name</div>
+                                    <a href="@Url.Action("Details","Trip", new {thisTripId=item.TripInstance.Id})" class="btn btn-warning">
+                                        View offer
+                                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="homepageOfferInformation-container">
+                                <div class="homepageOfferInformation">
+                                    <div class="homepageOfferDesc">@item.TripInstance.Description</div>
+                                    <div class="homepageOfferTerm">@item.TripInstance.DateDeparture.ToShortDateString() - @item.TripInstance.DateBack.ToShortDateString()</div>
+                                    <div class="homepageOfferPrice">from @item.TripInstance.Price PLN</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>
 
 <!-- END OF 6 trips showcase-->
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

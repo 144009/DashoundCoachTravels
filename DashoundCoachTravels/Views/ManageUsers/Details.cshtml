@@ -1,120 +1,128 @@
 ﻿@model DashoundCoachTravels.Models.ApplicationUser
 @using DashoundCoachTravels.Helpers
 
-@{
-    ViewBag.Title = "Account Details";
-}
-
-<div>
-    <h4>User Information</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        @*Section is  being shown depending on current account role*@
-
-        <dt>Permission Type:</dt>
-        @if (UserRoleHelper.IsAdmin(Model.Id))
-        {
-            <dd class="role-admin">Administrator</dd>}
-        @if (UserRoleHelper.IsEmployee(Model.Id))
-        {
-            <dd class="role-admin">Employee</dd>}
-        @if (UserRoleHelper.IsUser(Model.Id))
-        {
-            <dd class="role-admin">Customer/Basic</dd>}
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Town)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Town)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumHouse)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumHouse)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumFlat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumFlat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ZIPCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ZIPCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-    </dl>
+<div id="SubPagesTitle">
+    <h1>Account details - [@Model.UserName]</h1>
+    <div id="SubpagesAdminButtons">
+        <div style="font-weight:bold; font-size:16px;">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index") |
+            @Html.ActionLink("Change role", "EditUserRoles", new { id = Model.Id })
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Permissions", "EditUserRoles", new { id = Model.Id })|
-</p>
+
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    <dl class="dl-horizontal">
+                        <dt>Permission Type:</dt>
+                        @if (UserRoleHelper.IsAdmin(Model.Id))
+                        {
+                            <dd class="role-admin">Administrator</dd>}
+                        @if (UserRoleHelper.IsEmployee(Model.Id))
+                        {
+                            <dd class="role-admin">Employee</dd>}
+                        @if (UserRoleHelper.IsUser(Model.Id))
+                        {
+                            <dd class="role-admin">Customer/Basic</dd>}
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Surname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Surname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Country)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Country)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Town)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Town)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Street)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Street)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumHouse)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NumHouse)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumFlat)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NumFlat)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ZIPCode)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ZIPCode)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

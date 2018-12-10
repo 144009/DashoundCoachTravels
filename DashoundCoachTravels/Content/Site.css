@@ -9,12 +9,11 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background: rgba(255,255,255,.6);
-    margin-bottom: 5px;
-    box-shadow: 0 15px 5px -14px #3c2203;
+    margin-bottom: -15px;
     transition: all .5s;
     -webkit-transition: all .5s;
     font-size: 13px;
+    min-height:595px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -66,11 +65,16 @@ textarea {
     display: none;
     -webkit-transition: background 250ms ease 250ms;
     transition: background 250ms ease 250ms;
+    border-radius: 40px!important;
+    height: 80px;
+    width: 3%;
+    background-color: #f0ffffb0;
 }
 
     .scrollToTop:before {
         content: "\5E";
         font-size: 5em;
+        margin-left: 17%;
     }
 
     .scrollToTop:visited {
@@ -192,7 +196,7 @@ li#bookingNavbar {
 ###################### STOPKA ##########################################################
 ##################################################################################### */
 section#footer {
-    background-color: #12354c;
+    background-color: #252120;
     min-height: 115px;
 }
 
@@ -213,7 +217,7 @@ section#footer {
 
 
 footer {
-    background-color: #23262c;
+    background-color: #252120;
     color: #fff;
     font-size: 16px;
     min-height: 60px;
@@ -231,6 +235,66 @@ footer {
 /* #####################################################################################
 ###################### SEKCJA: podstrony################################################
 ##################################################################################### */
+
+/*SHARED - SUBPAGESTITLE : contains subpage title and possibly search box/warning box*/
+div#SubPagesTitle {
+    background: rgba(255,255,255,.6);
+    margin-top: -20px;
+    text-align: center;
+    padding: 2%;
+    min-height: 130px;
+    color: #212121;
+}
+div#SubpagesSearchBox-inner {
+    position: relative;
+    z-index: 999;
+    height: 64px;
+}
+div#SubpagesSearchBox-main {
+    width: 606px;
+    height: 64px;
+    margin: 0 auto;
+    position: relative;
+    transition: ease all .3s;
+    background: #212121;
+}
+button#SubpagesSearchButton {
+    width: 26%;
+    height: 64px;
+    border-radius: 2px;
+    background-color: #cc242a;
+    float: right;
+    position: relative;
+    border: 0;
+}
+input#Search, input#SearchB {
+    font-family: 'lato',sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+    padding-left: 10%;
+    padding-right: 10%;
+    z-index: 3;
+    transition: ease all .3s;
+}
+div#SubpagesMainContent {
+    background: rgba(255,255,255,.6);
+    text-align: center;
+    padding: 2%;
+    color: #212121;
+}
+div#SubpagesImageList {
+    width: 100%;
+}
+    div#Search h3 {
+        font-size: 1.6em;
+    }
+div#Search {
+    min-height: 240px;
+}
+/*END OF SHARED*/
 div#RolePanel, div#AccountPanel {
     border-style: groove;
     border-radius: 20px;
@@ -280,21 +344,11 @@ section#pages a, section#pages a:visited {
         -webkit-transition: 0.5s all ease;
         transition: all 0.5s ease 0s;
     }
-
-div#LocationsList > div > div#Search h3, div#VehiclesList > div >div#Search h3 {
-    font-size: 16px;
-    text-align: center;
-    line-break: auto;
+.carousel-caption p {
+    font-weight: bold;
+    -webkit-text-stroke: 2px #0000004a;
 }
-
-div#LocationsList > div > div#Search img, div#VehiclesList > div > div#Search img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 55%;
-}
-
-section#pages div.container {
+    section #pages div.container {
     margin-bottom: 5px;
     transition: all .5s;
     -webkit-transition: all .5s;
@@ -302,6 +356,18 @@ section#pages div.container {
     width: 100%;
 }
 /* SEKCJA: TRIP INDEX show list of trips*/
+div#SubpagesTripIndex {
+    background: rgba(255,255,255,.6);
+    margin-top: -120px;
+    margin-bottom: 16px;
+    text-align: center;
+    border-radius: 17px;
+    padding: 2%;
+    min-height: 130px;
+    color: #212121;
+}
+
+
 div.resultRow {
     background: rgba(255,255,255,.6);
     margin-bottom: 5px;
@@ -411,6 +477,66 @@ div.searchSeeBtn {
         }
 
    /* HOME PAGE 6 OFFERS*/
+div#homepageSearch-inner {
+    margin-top: -20px;
+    position: relative;
+    z-index: 999;
+    height: 64px;
+    margin-bottom: 96px;
+}
+div#homepageSearchBox-main {
+    width: 606px;
+    margin: 0 auto;
+    position: relative;
+    transition: ease all .3s;
+    background: #212121;
+}
+button#homepageSearchButton {
+    width: 26%;
+    height: 64px;
+    border-radius: 2px;
+    background-color: #cc242a;
+    float: right;
+    position: relative;
+    border: 0;
+}
+div#homepageSearchField {
+    width: 37%;
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    color: #e2e2e2;
+}
+    div#homepageSearchField > p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+input#PriceMin, input#PriceMax {
+    font-family: 'lato',sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+    padding-left: 10%;
+    padding-right: 10%;
+    z-index: 3;
+    transition: ease all .3s;
+}
+div#homepageTrips {
+    margin-top: -140px;
+    background: rgba(255,255,255,.6);
+    padding: 3% 1% 1%;
+    text-align: center;
+    color: #212121;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 0.71;
+    letter-spacing: 0.6px;
+    margin-bottom: 16px;
+}
+
 div#homepage-offers-col {
     padding-left: 8px;
     padding-right: 8px;
@@ -424,6 +550,8 @@ div#homepage-offers-col {
 div.homepage-image {
     overflow: hidden;
     height: 410px;
+    min-width: 102%;
+    margin-left: -4px;
 }
     div.homepage-image img {
         width: 100%;
@@ -434,6 +562,8 @@ div.homepage-image {
     }
 .img-thumbnail {
     background-color: #00bfff00;
+    border: 0;
+    width: 90%;
 }
 div.offersContainer {
     min-height: 180px;
@@ -454,10 +584,11 @@ div.offersContainer {
     }
 div.homepageOfferDestination {
     width: 100%;
-    font-size: 22px;
+    font-size: 0.95em;
     font-weight: 300;
     line-height: 1.27;
     text-transform: uppercase;
+    overflow: hidden;
     padding: 6px 10px 6px 16px;
     position: absolute;
     top: 50%;
@@ -486,14 +617,15 @@ div.homepageOfferInformation {
 }
 div.homepageOfferPrice {
     font-size: 14px;
+    margin-top: 15px;
     line-height: 1.25;
-    padding: 2px 0;
+    padding: 3px 0px;
     letter-spacing: 0.2px;
     border-style: solid;
-    background: darkgoldenrod;
+    background: #3cbd65;
 }
 div.homepageOfferTerm {
-    font-size: 12px;
+    font-size: 0.68em;
     font-weight: bold;
     padding: 2px 0;
     letter-spacing: 0.2px;
@@ -503,8 +635,203 @@ div.homepageOfferDesc {
     font-size: 13px;
     letter-spacing: 0.2px;
     line-height: 1.25;
-    border-style: dotted;
+    border-style: double;
     border-width: 0px 0px 2px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     overflow: auto;
+    padding-bottom: 5px;
+}
+
+/*SEKCJA: EDIT/DETAILS TABLE LIST*/
+table#SubpagesTableList {
+    width: 100%;
+    background-color: #fff;
+    text-align:center
+}
+thead#SubpagesTableList {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+tr#SubpagesTableList-head {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    text-align:center;
+}
+    tr#SubpagesTableList-head > th {
+        font-family: Montserrat-Medium;
+        font-size: 12px;
+        color: #fff;
+        line-height: 1.4;
+        text-transform: uppercase;
+        background-color: #333333;
+        padding-top: 24px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+tbody#SubpagesTableList {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+tbody#SubpagesTableList > tr{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+    tbody#SubpagesTableList > tr > th{
+    }
+
+    tbody#SubpagesTableList > tr > td{
+        font-family: Montserrat-Regular;
+        font-size: 14px;
+        color: #808080;
+        line-height: 1.4;
+        padding-top: 18px;
+        padding-bottom: 14px;
+    }
+
+div#SubpagesAdminButtons {
+    margin-top: 30px;
+}
+div#SubpagesTableList{
+    width:100%;
+}
+img#DetailsIMG.img-thumbnail {
+    width: 20%;
+}
+textarea#Description, textarea#TripInstance_Description {
+    float: left;
+    width: 280px;
+    min-height: 100px;
+}
+
+
+th#SubpagesTableList-head {
+    font-family: Montserrat-Medium;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.4;
+    text-transform: uppercase;
+    background-color: #333333;
+    padding-top: 24px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+
+tr#SubpagesTableList {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+td#SubpagesTableList {
+    font-family: Montserrat-Regular;
+    font-size: 14px;
+    color: #808080;
+    line-height: 1.4;
+    padding-top: 18px;
+    padding-bottom: 14px;
+}
+
+/*TRIP DETAILS section*/
+h1.offerName {
+    margin: 0;
+    font-weight: normal;
+    border-left: 10px solid #ff4e00;
+    color: #3c2203;
+    margin-bottom: 10px;
+    padding: 10px 20px !important;
+    background: rgba(255,255,255,.6);
+}
+.offerNo {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-right: 20px;
+}
+span.numberWrap {
+    background: #3c2203;
+    padding: 4px 10px;
+    vertical-align: middle;
+    color: #fff;
+}
+div.offerHeader {
+    padding: 0 10px;
+    margin-bottom: 15px;
+}
+div.offerImage {
+    float: left;
+    width: 59%;
+    position: relative;
+}
+div.bigFotoWrap {
+    position: relative;
+    margin-bottom: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+img#ImageTripOffer {
+    height: 370px;
+}
+div.offerInfo {
+    float: right;
+    width: 40%;
+    font-size: 1.1em;
+    color: #333;
+    text-align: left;
+}
+.offerInfo strong {
+    display: inline-block;
+    padding: 5px;
+    padding-left: 0;
+    border-bottom: 1px solid #ccc;
+    width: 40%;
+    text-align: right;
+    margin-top: 10px;
+}
+.offerInfo span {
+    display: block;
+    margin-left: 40%;
+    margin-top: -25px;
+}
+    .offerInfo span#offerBtn {
+        display: inline-block;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+.offerInfo hr:first-child {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 2px solid #000;
+}
+div.offerDescription {
+    padding: 0 10px;
+    margin-top: 36%;
+}
+.offerDescription h3 {
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #3c2203;
+    margin-top: 20px;
+    font-weight: normal;
+    font-size: 1.7em;
+    color: #3c2203;
+    border-left: 20px solid #3c2203;
+    padding-left: 10px;
+    text-shadow: 1px 1px 2px #fff, 1px 1px 2px #fff, 1px 1px 2px #fff, 1px 1px 2px #fff;
+}
+.offerDescription > div {
+    padding: 10px;
+    background: rgba(255,255,255,.8);
+    box-shadow: 0 15px 5px -14px #8b8376;
+}
+div#mainOffer {
+    background: rgba(255,255,255,.6);
 }

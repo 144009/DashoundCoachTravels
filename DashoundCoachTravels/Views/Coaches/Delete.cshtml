@@ -1,83 +1,88 @@
 ﻿@model DashoundCoachTravels.Models.DBEntities.Coach
 
-@{
-    ViewBag.Title = "Delete vehicle from database";
-}
-
-
-<h3>Are you sure you want to delete this?</h3>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehModel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seats)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleNumber)
-        </th>
-        <th>
-            Vehicle Photo
-        </th>
-        <th></th>
-    </tr>
-
-    <tr>
-        <td>
-            @Html.DisplayFor(model => model.Brand)
-        </td>
-        <td>
-            @Html.DisplayFor(model => model.VehModel)
-        </td>
-        <td>
-            @Html.DisplayFor(model => model.Seats)
-        </td>
-        <td>
-            @{
-                string parameterValue = Model.DateAdded.ToShortDateString();
-
-            }
-            @Html.DisplayFor(model => parameterValue)
-        </td>
-        <td>
-            @Html.DisplayFor(model => model.VehicleNumber)
-        </td>
-        <td>
-            @if (!String.IsNullOrEmpty(Model.VehScreenshot))
-            {
-                <img src="@Model.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-            }
-            else
-            {
-                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-            }
-
-
-            @*Html.DisplayNameFor(model => model.VehScreenshot)*@
-        </td>
-    </tr>
-
-</table>
-
-<p>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        @Html.ActionLink("Edit", "Edit") | @Html.ActionLink("Back to List", "Index")
+<div id="SubPagesTitle">
+    <h1>Delete vehicle from database</h1>
+    <h3>Are you sure you want to delete this?</h3>
+    <div id="SubpagesAdminButtons">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+        <div style="font-weight:bold; font-size:16px;">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) | @Html.ActionLink("Back to List", "Index")
+        </div>
+        }
     </div>
-    }
-</p>
+</div>
 
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    <table class="table-responsive table-striped" id="SubpagesTableList">
+                        <thead id="SubpagesTableList">
+                            <tr id="SubpagesTableList-head">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Brand)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.VehModel)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Seats)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateAdded)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.VehicleNumber)
+                                </th>
+                                <th>
+                                    Vehicle Photo
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="SubpagesTableList">
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => model.Brand)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VehModel)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.Seats)
+                                </td>
+                                <td>
+                                    @{
+                                        string parameterValue = Model.DateAdded.ToShortDateString();
+
+                                    }
+                                    @Html.DisplayFor(model => parameterValue)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VehicleNumber)
+                                </td>
+                                <td>
+                                    @if (!String.IsNullOrEmpty(Model.VehScreenshot))
+                                    {
+                                        <img src="@Model.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script type="text/javascript">
     $(document).ready(function () {

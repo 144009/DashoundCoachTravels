@@ -1,59 +1,56 @@
 ﻿@model DashoundCoachTravels.Models.FleetViewModel
 
-@{
-    ViewBag.Title = "Our fleet";
-}
+<div id="SubPagesTitle">
+    <h1>Locations</h1>
 
-<h1>@ViewBag.Title</h1>
-
-
-<div class="container">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Vehicle name" class="form-control" />
+    <div id="SubpagesSearchBox">
+        <div id="SubpagesSearchBox-inner" class="row">
+            <div id="SubpagesSearchBox-main" class="row">
+                <div class="col-sm-6" id="homepageSearchField">
+                    <p>
+                        Vehicle Name
+                    </p>
+                    <input type="text" id="Search" placeholder="Vehicle name" class="form-control" />
+                </div>
+                <div>
+                    <button id="SubpagesSearchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <section id="pages">
-    <div class="container">
+    <div id="SubpagesMainContent">
         <div class="row">
             <div class="col-xs-12">
-                <div class="contents">
-                    <div id="VehiclesList">
-
-                        @{
-                            if (Model.List != null)
-                            {
-                                <div class="row">
-                                    @foreach (var item in Model.List)
+                <div class="container" id="SubpagesImageList">
+                    @{
+                        if (Model.List != null)
+                        {
+                            <div class="row">
+                                @foreach (var item in Model.List)
+                                {
+                                <div class="col-md-4 Search" id="Search">
+                                    <h3>@item.Brand @item.VehModel</h3>
+                                    @if (!String.IsNullOrEmpty(item.VehScreenshot))
                                     {
-                                    <div class="col-md-4 Search" id="Search">
-                                        <h3>@item.Brand @item.VehModel</h3>
-                                        @if (!String.IsNullOrEmpty(item.VehScreenshot))
-                                        {
-                                            <img src="@item.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-                                        }
-                                        else
-                                        {
-                                            <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-                                        }
-                                    </div>
-
+                                        <img src="@item.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
                                     }
                                 </div>
-                            }
+                                }
+                            </div>
                         }
-
-
-                    </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 <script type="text/javascript">
     $(document).ready(function () {

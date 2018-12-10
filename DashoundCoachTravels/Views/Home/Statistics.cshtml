@@ -1,79 +1,94 @@
 ﻿@model DashoundCoachTravels.Models.StatisticsViewModel
 
-@{
-    ViewBag.Title = "Statistics";
-}
-<h2>@ViewBag.Title.</h2>
+<div id="SubPagesTitle">
+    <h1>Statistics</h1>
+</div>
 
-<div>
-    <hr />
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <table class="table table-bordered">
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalUsers)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalUsers)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalEmployee)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalEmployee)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalLocations)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalLocations)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalVehicles)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalVehicles)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgVehicleSeats)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgVehicleSeats)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalTrips)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalTrips)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalActiveTrips)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalActiveTrips)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalTripsSpots)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalTripsSpots)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgTripPrice)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgTripPrice)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgTripSpots)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgTripSpots)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalReservationSpotsBooked)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalReservationSpotsBooked)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgTotalSpotsReserved)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgTotalSpotsReserved)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalTripsBooked)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalTripsBooked)</td>
-                </tr>
-                <tr>
-                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalReservationsLastMonth)</th>
-                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalReservationsLastMonth)</td>
-                </tr>
-
-            </table>
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    <div class="col-md-6 col-md-offset-3">
+                        <table class="table-responsive table-striped" id="SubpagesTableList">
+                            <thead id="SubpagesTableList">
+                                <tr id="SubpagesTableList-head">
+                                    <th id="SubpagesTableList-head">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="SubpagesTableList" >
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalUsers)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalUsers)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalEmployee)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalEmployee)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalLocations)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalLocations)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalVehicles)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalVehicles)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgVehicleSeats)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgVehicleSeats)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalTrips)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalTrips)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalActiveTrips)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalActiveTrips)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalTripsSpots)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalTripsSpots)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgTripPrice)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgTripPrice)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgTripSpots)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgTripSpots)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalReservationSpotsBooked)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalReservationSpotsBooked)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.AvgTotalSpotsReserved)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.AvgTotalSpotsReserved)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalTripsBooked)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalTripsBooked)</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-right col-md-3">@Html.DisplayNameFor(model => model.TotalReservationsLastMonth)</th>
+                                    <td class="col-md-3">@Html.DisplayFor(model => model.TotalReservationsLastMonth)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <hr />
+</section>
 
-</div>
 <div class="row">
-    @Model.ReservationChart
+    <div class="container">
+        @Model.ReservationChart
+    </div>
 </div>
+
+
+
+
 

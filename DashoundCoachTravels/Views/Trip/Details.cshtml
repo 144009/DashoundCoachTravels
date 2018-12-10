@@ -2,122 +2,137 @@
 @using DashoundCoachTravels.Helpers
 @using Microsoft.AspNet.Identity
 
-@{
-    ViewBag.Title = Model.TripInstance.Name;
-}
-
-@if (!String.IsNullOrEmpty(Model.TripInstance.Banner))
-{
-    <img src="@Model.TripInstance.Banner" alt="Banner">
-}
-
-@if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
-{
-    <br />
-    <br />
-    <div class="panel panel-info">
-        <div class="panel-heading">Manage trip</div>
-        <div class="panel-body">
-            <p>
-                Number of reservations: @Model.NumberOfReservations
-                <br />
-                @if (Model.NumberOfReservations == 0)
-                {
-                    <br />
-                    <a href="@Url.Action("Edit", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                        Edit
-                    </a>
-                    <a href="@Url.Action("Delete", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        Delete
-                    </a>
-                }
-                else
-                {
-                <p class="text-danger">Cannot edit a trip that has active reservations!</p>
-            }
-                </p>
+<section id="pages">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="contents" id="mainOffer">
+                    <div id="offerDetails">
+                        <div class="offerWarp">
+                            <h1 class="offerName">@Model.TripInstance.Name</h1>
+                            <div class="offerNo">
+                                <span class="numberWrap">
+                                    Offer number: <b>@Model.TripInstance.Id</b>
+                                </span>
+                                <a href="@Url.Action("Index")" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                                    Back to list
+                                </a>
+                            </div>
+                            <div class="offerHeader">
+                                <div class="offerImage">
+                                    <div class="bigFotoWrap">
+                                        @if (!String.IsNullOrEmpty(Model.TripInstance.Banner))
+                                        {
+                                            <img src="@Model.TripInstance.Banner" alt="Banner" id="ImageTripOffer">
+                                        }
+                                    </div>
+                                </div>
+                                <div class="offerInfo">
+                                    <div class="bookingBtnWrap">
+                                        <a href="@Url.Action("Index")" class="btn btn-success btn-lg">
+                                            <span id="offerBtn" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                            @Model.TripInstance.Price.ToString() PLN - Book!
+                                        </a>
+                                        @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
+                                        {
+                                            if (Model.NumberOfReservations == 0)
+                                            {
+                                                <a href="@Url.Action("Edit", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
+                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    Edit
+                                                </a>
+                                                <a href="@Url.Action("Delete", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
+                                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                    Delete
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p class="text-danger">Cannot edit a trip that has active reservations!</p>
+                                            }
+                                        }
+                                    </div>
+                                    <hr />
+                                    @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
+                                    {
+                                        <strong>Number of reservations:</strong>
+                                        <span>@Model.NumberOfReservations</span>
+                                    }
+                                    <strong>Coach:</strong>
+                                    <span>@Model.CoachModel</span>
+                                    <strong>Coach Picture:</strong>
+                                    <span>
+                                        @if (!String.IsNullOrEmpty(Model.CoachBanner))
+                                        {
+                                            <img src="@Model.CoachBanner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                        }
+                                    </span>
+                                    <strong>Date:</strong>
+                                    <span>@Model.TripInstance.DateDeparture.ToString("d") - @Model.TripInstance.DateBack.ToString("d")</span>
+                                    <strong>Spots booked:</strong>
+                                    <span>@Model.NumSpotsLeft.ToString() / @Model.TripInstance.NumSpots.ToString()</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="offerDescription">
+                        <h3>Description</h3>
+                        <div>
+                            @if (!String.IsNullOrEmpty(Model.TripInstance.Description))
+                            {
+                                @Html.DisplayFor(model => model.TripInstance.Description)
+                            }
+                            else
+                            {
+                                <i>This trip has no description.</i>
+                            }
+                        </div>
+                        <h3>Sightseeing plan</h3>
+                        <div>
+                            <ul class="list-group">
+                                @if (Model.Route.ListElement != null)
+                                {
+                                    int n = 0;
+                                    foreach (var location in Model.Route.ListElement)
+                                    {
+                                        ++n;
+                                        <li class="list-group-item">@n.ToString(). @location.Name, @location.Town, @location.Country</li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="list-group-item">1. <i>No sublocations to visit</i></li>
+                                }
+                            </ul>
+                        </div>
+                        <h3>Trip map</h3>
+                        <div>
+                            @if (Model.Route.ListElement != null)
+                            {
+                                @* <img src="@("http://maps.google.com/maps/api/staticmap?size=640x320&scale=2&maptype=roadmap" + ViewBag.MapMarkers + "&key=YOUR_API_KEY")" class="img-responsive" alt="GoogleMap" width="1280" height="640"> *@
+                                <img src="~/Media/sampleMap.jpg" class="img-responsive" alt="GoogleMap" width="1280" height="640">
+                            }
+                            else
+                            {
+                                <img src="~/Media/sampleMap.jpg" class="img-responsive" alt="GoogleMap" width="1280" height="640">
+                            }
+                        </div>
+                        <h3>Take a closer look</h3>
+                        <div>
+                            <div id="mapid" style="width: 100%; min-height: 640px;"></div>
+                        </div>
+                    </div>
+                </div>>
             </div>
         </div>
-    }
-
-<h2>@ViewBag.Title</h2>
-
-<div class="row" width="100%">
-    <div class="col-md-4">
-        <h4>Date</h4>
-        <h5>@Model.TripInstance.DateDeparture.ToString("d") - @Model.TripInstance.DateBack.ToString("d")</h5>
     </div>
+</section>
 
-    <div class="col-md-4">
-        <h4>Spots booked</h4>
-        <h5>@Model.NumSpotsLeft.ToString() / @Model.TripInstance.NumSpots.ToString()</h5>
-    </div>
-
-    <div class="col-md-4" align="right">
-        <a href="@Url.Action("Book", new { id = Model.TripInstance.Id })" class="btn btn-success btn-lg">
-            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            @Model.TripInstance.Price.ToString() PLN - Book!
-        </a>
-    </div>
-</div>
-
-@if (!String.IsNullOrEmpty(Model.TripInstance.Description))
-{
-    <h3>Description</h3>
-    @Html.DisplayFor(model => model.TripInstance.Description)
-}
-
-<h3>Coach</h3>
-<h4>Model:</h4><h5>@Model.CoachModel</h5>
-<h4>Photo:</h4><h5>
-    @if (!String.IsNullOrEmpty(Model.CoachBanner))
-    {
-        <img src="@Model.CoachBanner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-    }
-    else
-    {
-        <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-    }
-</h5>
-
-@if (Model.Route.ListElement != null)
-{
-    <h3>Sightseeing plan</h3>
-    <ul class="list-group">
-        @if (Model.Route.ListElement != null)
-        {
-            int n = 0;
-            foreach (var location in Model.Route.ListElement)
-            {
-                ++n;
-                <li class="list-group-item">@n.ToString(). @location.Name, @location.Town, @location.Country</li>
-            }
-        }
-    </ul>
-
-    <h3>Trip route on map</h3>
-   @* <img src="@("http://maps.google.com/maps/api/staticmap?size=640x320&scale=2&maptype=roadmap" + ViewBag.MapMarkers + "&key=YOUR_API_KEY")" class="img-responsive" alt="GoogleMap" width="1280" height="640"> *@
-    <img src="~/Media/sampleMap.jpg" class="img-responsive" alt="GoogleMap" width="1280" height="640">
-}
-else
-{
-    <br />
-}
-<br />
-<p>
-
-    <a href="@Url.Action("Index")" class="btn btn-default">
-        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-        Back to list
-
-    </a>
-</p>
-
-
-
-<div id="mapid" style="width: 600px; height: 400px;"></div>
 <script>
 
     var GeoSearchControl = window.GeoSearch.GeoSearchControl;
@@ -166,6 +181,6 @@ else
     map.addControl(searchControl);
     map.addLayer(osm);
 
- 
+
 
 </script>

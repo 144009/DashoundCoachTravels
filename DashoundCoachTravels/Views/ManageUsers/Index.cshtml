@@ -1,87 +1,105 @@
 ﻿@model IEnumerable<DashoundCoachTravels.Models.ApplicationUser>
 @using DashoundCoachTravels.Helpers
-@{
-    ViewBag.Title = "Manage user accounts";
-}
-<h1>@ViewBag.Title</h1>
-<br />
-<p class="text-success">@ViewBag.StatusMessage</p>
-<br />
 
-<div class="container">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Search user" class="form-control" />
+
+<div id="SubPagesTitle">
+    <h1>Manage user accounts</h1>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div id="SubpagesSearchBox">
+        <div id="SubpagesSearchBox-inner" class="row">
+            <div id="SubpagesSearchBox-main" class="row">
+                <div class="col-sm-6" id="homepageSearchField">
+                    <p>
+                        User Name
+                    </p>
+                    <input type="text" id="Search" placeholder="User name" class="form-control" /> <br />
+                </div>
+                <div>
+                    <button id="SubpagesSearchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
+                </div>
+            </div>
         </div>
+    </div>
+    <div id="SubpagesAdminButtons">
+            <div style="font-weight:bold; font-size:16px;">
+                @Html.ActionLink("Back to list", "Index", "Manage", routeValues: null, htmlAttributes: new { })
+            </div>
     </div>
 </div>
 
-<table class="table table-striped table-hover table-condensed">
-    <tr>
-        <th>User name</th>
-        <th>@Html.DisplayNameFor(model => model.Email)</th>
-        <th>Role</th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Surname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Town)
-        </th>
-        <th></th>
-    </tr>
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    <table class="table-responsive table-striped" id="SubpagesTableList">
+                        <thead id="SubpagesTableList">
+                            <tr id="SubpagesTableList-head">
+                                <th>User name</th>
+                                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                                <th>Role</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Surname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Country)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Town)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="SubpagesTableList">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="Search">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
 
-    @foreach (var item in Model)
-    {
-    <tr class="Search">
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-
-        @if (UserRoleHelper.IsAdmin(item.Id))
-        {
-            <td class="role-admin">Administrator</td>}
-        @if (UserRoleHelper.IsEmployee(item.Id))
-        {
-            <td class="role-admin">Employee</td>}
-        @if (UserRoleHelper.IsUser(item.Id))
-        {
-            <td class="role-admin">Customer/Basic</td>}
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Town)
-        </td>
-         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Permissions", "EditUserRoles", new { id = item.Id })
-        </td>
-    </tr>
-    }
-
-</table>
-
-<div>
-    @Html.ActionLink("Back to list", "Index", "Manage", routeValues: null, htmlAttributes: new { })
-</div>
+                                    @if (UserRoleHelper.IsAdmin(item.Id))
+                                    {
+                                        <td class="role-admin">Administrator</td>}
+                                    @if (UserRoleHelper.IsEmployee(item.Id))
+                                    {
+                                        <td class="role-admin">Employee</td>}
+                                    @if (UserRoleHelper.IsUser(item.Id))
+                                    {
+                                        <td class="role-admin">Customer/Basic</td>}
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Surname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Country)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Town)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                                        @Html.ActionLink("Permissions", "EditUserRoles", new { id = item.Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -167,7 +167,7 @@ namespace DashoundCoachTravels.Controllers
                 Trip_Locations thisRoute = dbcontext.Trip_Locations.Find(thisSublocationId);
                 if (thisRoute == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-                bool isDeleted = false;
+                bool isDeleted = false; // used to refresh the numbering of sublocations
                 Trip_Locations deletedItem = new Trip_Locations();
 
                 foreach (var item in dbcontext.Trip_Locations.ToList())

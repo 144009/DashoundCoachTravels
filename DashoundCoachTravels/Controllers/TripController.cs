@@ -58,11 +58,11 @@ namespace DashoundCoachTravels.Controllers
                     var list = new List<TripLocationsInstanceViewModels>();
                     foreach (var item in dbcontext.Trip_Locations.ToList())
                     {
-                        if(item.Id_Trip == trip.Id)
+                        if(item.Id_Trip == trip.Id) // first check if [Trip] table and [TripLocation] table are connected via same ID. Below same for location
                         {
                             foreach(var location in dbcontext.Locations.ToList())
                             {
-                                if(item.Id_Location == location.Id)
+                                if(item.Id_Location == location.Id) // check the table created after removing many-many table connection
                                 {
                                     list.Add(new TripLocationsInstanceViewModels
                                     {
@@ -145,6 +145,7 @@ namespace DashoundCoachTravels.Controllers
                         {
                             // Create a marker string using current location data; can be modified for any url string if needed depending on map provider
                             ++i;
+                            // cycles the string array in a loop
                             ViewBag.Markers += "&markers=color:" + colours[(i - 1) % 3] + "|label:" + i.ToString() + "|" + location.Name + "," + location.Town + "," + location.Country;
                             // ********************
                             list.Add(new TripLocationsInstanceViewModels

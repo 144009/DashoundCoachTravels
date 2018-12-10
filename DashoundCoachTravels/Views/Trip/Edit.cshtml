@@ -1,146 +1,155 @@
 ﻿@model DashoundCoachTravels.Models.ViewEditTripsViewModel
 
-    @{
-        ViewBag.Title = "Edit trip: " + Model.TripInstance.Name;
-    }
-
-<h2>@ViewBag.Title</h2>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.TripInstance.Id)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TripInstance.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TripInstance.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.DateDeparture, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-3">
-            <div class='input-group date' id='datetimepickerCheckIn'>
-                @Html.EditorFor(model => model.TripInstance.DateDeparture, new { htmlAttributes = new { @class = "form-control" } })
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-            @Html.ValidationMessageFor(model => model.TripInstance.DateDeparture, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.DateBack, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-3">
-            <div class='input-group date' id='datetimepickerCheckOut'>
-                @Html.EditorFor(model => model.TripInstance.DateBack, new { htmlAttributes = new { @class = "form-control" } })
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-            @Html.ValidationMessageFor(model => model.TripInstance.DateBack, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.NumSpots, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TripInstance.NumSpots, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TripInstance.NumSpots, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TripInstance.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TripInstance.Price, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.TripInstance.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TripInstance.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.Banner, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.TripInstance.Banner, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TripInstance.Banner, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TripInstance.CoachNumberId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.TripInstance.CoachNumberId, Model.CoachVehicleIdList, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.TripInstance.CoachNumberId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Route, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.ActionLink("Edit route", "Index", "TripLocation", new { thisTripId = Model.TripInstance.Id }, null)
-            <br />
-            @if (Model.Route.ListElement != null)
-            {
-                int i = 0;
-                foreach (var location in Model.Route.ListElement)
-                {
-                    ++i;
-                    @(i.ToString() + ". " + location.Name + ", " + location.Town + ", " + location.Country)
-                    <br />
-                }
-            }
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">
-                <i class="glyphicon glyphicon-edit"></i> Save changes
-            </button>
+<div id="SubPagesTitle">
+    <h1>Edit trip: [@Model.TripInstance.Name]</h1>
+    <div id="SubpagesAdminButtons">
+        <div style="font-weight:bold; font-size:16px;">
+            @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
 </div>
-    }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.TripInstance.Id)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.TripInstance.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TripInstance.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.DateDeparture, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    <div class='input-group date' id='datetimepickerCheckIn'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        @Html.EditorFor(model => model.TripInstance.DateDeparture, new { htmlAttributes = new { @class = "form-control", @style = "width:240px;" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.TripInstance.DateDeparture, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.DateBack, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    <div class='input-group date' id='datetimepickerCheckOut'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        @Html.EditorFor(model => model.TripInstance.DateBack, new { htmlAttributes = new { @class = "form-control", @style = "width:240px;" } })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.TripInstance.DateBack, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.NumSpots, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.TripInstance.NumSpots, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TripInstance.NumSpots, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.TripInstance.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TripInstance.Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(model => model.TripInstance.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TripInstance.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.Banner, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.TripInstance.Banner, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TripInstance.Banner, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TripInstance.CoachNumberId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.TripInstance.CoachNumberId, Model.CoachVehicleIdList, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TripInstance.CoachNumberId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Route, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.ActionLink("Edit route", "Index", "TripLocation", new { thisTripId = Model.TripInstance.Id }, null)
+                                    <br />
+                                    @if (Model.Route.ListElement != null)
+                                    {
+                                        int i = 0;
+                                        foreach (var location in Model.Route.ListElement)
+                                        {
+                                            ++i;
+                                            @(i.ToString() + ". " + location.Name + ", " + location.Town + ", " + location.Country)
+                                            <br />
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-edit"></i> Save changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
+    </div>
+</section>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(function () {
-                $('#datetimepickerCheckIn').datetimepicker({
-                });
-                $("#datetimepickerCheckIn").on("dp.change", function (e) {
-                    $('#datetimepickerCheckOut').data("DateTimePicker").minDate(e.date);
-                });
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#datetimepickerCheckIn').datetimepicker({
+            });
+            $("#datetimepickerCheckIn").on("dp.change", function (e) {
+                $('#datetimepickerCheckOut').data("DateTimePicker").minDate(e.date);
             });
         });
-    </script>
+    });
+</script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(function () {
-                $('#datetimepickerCheckOut').datetimepicker({
-                });
-                $("#datetimepickerCheckOut").on("dp.change", function (e) {
-                    $('#datetimepickerCheckIn').data("DateTimePicker").maxDate(e.date);
-                });
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#datetimepickerCheckOut').datetimepicker({
+            });
+            $("#datetimepickerCheckOut").on("dp.change", function (e) {
+                $('#datetimepickerCheckIn').data("DateTimePicker").maxDate(e.date);
             });
         });
-    </script>
+    });
+</script>

@@ -1,72 +1,60 @@
 ﻿@model DashoundCoachTravels.Models.TripsViewModels
 @using DashoundCoachTravels.Helpers
 @using Microsoft.AspNet.Identity
-
 @using PagedList.Mvc; @*import this so we get our HTML Helper*@
 @using PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 
-@{
-    ViewBag.Title = "Our trip offer";
-}
+<div id="SubPagesTitle">
+    <h1>Our trip offer</h1>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+</div>
 
 <section id="pages">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="contents">
-                    <h1>@ViewBag.Title</h1>
-                    <p class="text-success">@ViewBag.StatusMessage</p>
-                    @using (Html.BeginForm("Index", "Trip", FormMethod.Get))
-                    {
-                        @Html.AntiForgeryToken()
+                <div class="contents">                  
+                    <div id="homepageSearch">
+                        @using (Html.BeginForm("Index", "Trip", FormMethod.Get))
+                        {
+                            @Html.AntiForgeryToken()
 
-                        <div class="form-search">
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.PriceMin, htmlAttributes: new { @class = "control-label" })
-
+                            <div id="homepageSearch-inner" class="form-search">
+                                <div id="homepageSearchBox-main" class="row">
+                                    <div class="col-sm-5" id="homepageSearchField">
+                                        <p>
+                                            Minimum price
+                                        </p>
                                         @Html.EditorFor(model => model.PriceMin, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.PriceMin, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        @Html.LabelFor(model => model.PriceMax, htmlAttributes: new { @class = "control-label" })
-
+                                    <div class="col-sm-5" id="homepageSearchField">
+                                        <p>
+                                            Maximum price
+                                        </p>
                                         @Html.EditorFor(model => model.PriceMax, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.PriceMax, "", new { @class = "text-danger" })
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-4">
-                                        <br />
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="glyphicon glyphicon-search"></i> Search
-                                        </button>
-
-
+                                    <div>
+                                        <button id="homepageSearchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                    <hr />
+                        }
 
-                    <h2>Avaliable trips</h2>
-                    @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
-                    {
-                        <a href="@Url.Action("Create")" class="btn btn-default">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            Create a trip
-                        </a>
+                    </div>
 
-                    }
-
-                    @Html.PagedListPager((IPagedList)Model.List, page => Url.Action("Index", new { page }))
+                    <div id="SubpagesTripIndex">
+                        <h2>Avaliable trips</h2>
+                        @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
+                        {
+                            <a href="@Url.Action("Create")" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                Create a trip
+                            </a>
+                        }
+                        @Html.PagedListPager((IPagedList)Model.List, page => Url.Action("Index", new { page }))
+                    </div>
 
                     <div class="form-group">
                         @foreach (var item in Model.List)
@@ -163,7 +151,6 @@
                             </div>
                         }
                     </div>
-                    @Html.PagedListPager((IPagedList)Model.List, page => Url.Action("Index", new { page }))
                 </div>
             </div>
         </div>

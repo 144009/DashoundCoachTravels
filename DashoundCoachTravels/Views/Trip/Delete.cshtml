@@ -1,87 +1,101 @@
 ﻿@model DashoundCoachTravels.Models.DBEntities.Trip
 
-<h3>Are you sure you want to delete this trip?</h3>
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumSpots)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumSpots)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateDeparture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateDeparture)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateBack)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateBack)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Banner)
-        </dt>
-
-        <dd>
-            @if (!String.IsNullOrEmpty(Model.Banner))
+<div id="SubPagesTitle">
+    <h1>Delete trip from database</h1>
+    <h3>Are you sure you want to delete this trip?</h3>
+    <div id="SubpagesAdminButtons">
+        <div style="font-weight:bold; font-size:16px;">
+            @using (Html.BeginForm())
             {
-                <img src="@Model.Banner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
             }
-            else
-            {
-                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-            }
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CoachNumberId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CoachNumberId)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
         </div>
-    }
+    </div>
 </div>
+
+<section id="pages">
+    <div id="SubpagesMainContent">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumSpots)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NumSpots)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Price)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateDeparture)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DateDeparture)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateBack)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DateBack)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Banner)
+                        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CoachNumberId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CoachNumberId)
+                        </dd>
+                        <dd>
+                            @if (!String.IsNullOrEmpty(Model.Banner))
+                            {
+                                <img src="@Model.Banner" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                            }
+                            else
+                            {
+                                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                            }
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

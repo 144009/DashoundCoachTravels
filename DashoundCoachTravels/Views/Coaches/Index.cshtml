@@ -2,172 +2,107 @@
 @using DashoundCoachTravels.Helpers
 @using Microsoft.AspNet.Identity
 
-@{
-    ViewBag.Title = "Manage available vehicles";
-}
-<h1>@ViewBag.Title</h1>
-<br />
-<p class="text-success">@ViewBag.StatusMessage</p>
-<br />
 
-<div class="container">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
-            <input type="text" id="Search" placeholder="Vehicle name" class="form-control" /> <br />   
+<div id="SubPagesTitle">
+    <h1>Manage available vehicles</h1>
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <div id="SubpagesSearchBox">
+        <div id="SubpagesSearchBox-inner" class="row">
+            <div id="SubpagesSearchBox-main" class="row">
+                <div class="col-sm-5" id="homepageSearchField">
+                    <p>
+                        Vehicle Name
+                    </p>
+                    <input type="text" id="Search" placeholder="Vehicle name" class="form-control" /> <br />
+                </div>
+                <div class="col-sm-5" id="homepageSearchField">
+                    <p>
+                        Minimum seat count
+                    </p>
+                    <input type="text" id="SearchB" placeholder="more than x seats" class="form-control" />
+                </div>
+                <div>
+                    <button id="SubpagesSearchButton" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Search</button>
+                </div>
+            </div>
         </div>
-        <br />
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
-            <input type="text" id="SearchB" placeholder="more than x seats" class="form-control" />
-            @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
-            {
-                <a href="@Url.Action("Create")" class="btn btn-default">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    Add a new vehicle
-                </a>
-            }
+    </div>
+    <div id="SubpagesAdminButtons">
+        @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
+        {
+            <a href="@Url.Action("Create")" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Add a new vehicle
+            </a>
+        }
+        <div style="font-weight:bold; font-size:16px;">
+            @Html.ActionLink("Back to list", "Index", "Manage", routeValues: null, htmlAttributes: new { })
         </div>
     </div>
 </div>
 
-
-@*
-@using (Html.BeginForm("Index", "Coaches", FormMethod.Get))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-search">
-        <hr />
+<section id="pages">
+    <div id="SubpagesMainContent">
         <div class="row">
-            <div class="col-sm-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label" })
+            <div class="col-xs-12">
+                <div class="container" id="SubpagesTableList">
+                        <table class="table-responsive table-striped" id="SubpagesTableList">
+                            <thead id="SubpagesTableList">
+                                <tr id="SubpagesTableList-head">
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Brand)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.VehModel)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Seats)
+                                    </th>
+                                    <th>
+                                        Vehicle Photo
+                                    </th>
+                                    <th>
 
-                    @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.VehModel, htmlAttributes: new { @class = "control-label" })
-
-                    @Html.EditorFor(model => model.VehModel, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VehModel, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-
-                    @Html.LabelFor(model => model.Seats, htmlAttributes: new { @class = "control-label" })
-
-                    @Html.EditorFor(model => model.Seats, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Seats, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            @*<div class="col-sm-2">
-                    <div class="form-group">
-
-                        @Html.LabelFor(model => model.VehicleNumber, htmlAttributes: new { @class = "control-label" })
-
-                        @Html.EditorFor(model => model.VehicleNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.VehicleNumber, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-            <div class="form-group">
-                <div class="col-sm-4">
-                    <button type="submit" class="btn btn-default">
-                        <i class="glyphicon glyphicon-search"></i> Search
-                    </button>
-                    @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
-                    {
-                        <a href="@Url.Action("Create")" class="btn btn-default">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            Add a new vehicle
-                        </a>
-                    }
-
-
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="SubpagesTableList">
+                                @foreach (var item in Model.List)
+                                {
+                                    <tr id="Search" class="Search">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Brand)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.VehModel)
+                                        </td>
+                                        <td class="Number">
+                                            @Html.DisplayFor(modelItem => item.Seats)
+                                        </td>
+                                        <td>
+                                            @if (!String.IsNullOrEmpty(item.VehScreenshot))
+                                            {
+                                                <img src="@item.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
     </div>
-}*@
-
-
-<table class="table table-striped table-hover table-condensed">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehModel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seats)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.DateAdded)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleNumber)
-            </th>*@
-        <th>
-            Vehicle Photo
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.List)
-    {
-        <tr id="Search" class="Search">
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehModel)
-            </td>
-            <td class="Number">
-                @Html.DisplayFor(modelItem => item.Seats)
-            </td>
-            @*<td>
-                    @{
-                        string parameterValue = item.DateAdded.ToShortDateString();
-
-                    }
-                    @Html.DisplayFor(modelItem => parameterValue)
-                </td
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleNumber)
-                </td>>*@
-            <td>
-                @if (!String.IsNullOrEmpty(item.VehScreenshot))
-                {
-                    <img src="@item.VehScreenshot" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-                }
-                else
-                {
-                    <img src="~/media/default.jpg" class="img-thumbnail" alt="Thumbnail" width="200" height="200">
-                }
-
-
-                @*Html.DisplayNameFor(model => model.VehScreenshot)*@
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
-
-<div>
-    @Html.ActionLink("Back to list", "Index", "Manage", routeValues: null, htmlAttributes: new { })
-</div>
+</section>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -183,7 +118,7 @@
                     $(this).show();
                 }
             });
-            
+
         });
     })
 </script>
