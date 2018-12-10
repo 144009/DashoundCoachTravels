@@ -115,27 +115,27 @@
                                     {
                                         <i>No. of reservations:</i>
                                         <b>@item.NumberOfReservations</b>
-                                        if (item.NumberOfReservations == 0)
-                                        {
-
-                                        }
-                                        else
+                                        var currDate = DateTime.Now;
+                                        if (item.NumberOfReservations > 0 && item.TripInstance.DateBack > currDate)
                                         {
                                             <i class="text-danger">Cannot edit a trip that has active reservations!</i>
                                         }
-                                        <i>Manage:</i>
-                                        <b>
-                                            <a href="@Url.Action("Edit", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">
-                                                Edit
-                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                            </a>
-                                        </b>
-                                        <b>
-                                            <a href="@Url.Action("Delete", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">
-                                                Delete
-                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                            </a>
-                                        </b>
+                                        else
+                                        {
+                                            <i>Manage:</i>
+                                            <b>
+                                                <a href="@Url.Action("Edit", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">
+                                                    Edit
+                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                </a>
+                                            </b>
+                                            <b>
+                                                <a href="@Url.Action("Delete", new { thisTripId = item.TripInstance.Id })" class="btn btn-default">
+                                                    Delete
+                                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                </a>
+                                            </b>
+                                        }
                                     }
                                 </div>
 

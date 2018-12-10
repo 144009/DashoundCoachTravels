@@ -36,20 +36,21 @@
                                         </a>
                                         @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()) || UserRoleHelper.IsEmployee(User.Identity.GetUserId()))
                                         {
-                                            if (Model.NumberOfReservations == 0)
+                                            var currDate = DateTime.Now;
+                                            if (Model.NumberOfReservations > 0 && Model.TripInstance.DateBack > currDate)
                                             {
-                                                <a href="@Url.Action("Edit", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
-                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                                    Edit
-                                                </a>
-                                                <a href="@Url.Action("Delete", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
-                                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                                    Delete
-                                                </a>
+                                                <p class="text-danger">Cannot edit a trip that has active reservations!</p>
                                             }
                                             else
                                             {
-                                                <p class="text-danger">Cannot edit a trip that has active reservations!</p>
+                                                <a href="@Url.Action("Edit", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
+                                                    <span id="offerBtn" class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                    Edit
+                                                </a>
+                                                <a href="@Url.Action("Delete", new { thisTripId = Model.TripInstance.Id })" class="btn btn-info">
+                                                    <span id="offerBtn" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                    Delete
+                                                </a>
                                             }
                                         }
                                     </div>

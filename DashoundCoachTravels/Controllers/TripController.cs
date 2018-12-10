@@ -232,8 +232,6 @@ namespace DashoundCoachTravels.Controllers
 
             //check for reservations. Cannot edit while there are any. 
             int NumberOfReservations = countReservavtionsMade((int)thisTripId);
-            if (NumberOfReservations > 0)
-                return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
             Trip trip = dbcontext.Trips.Find(thisTripId); //get current trip
             if (trip == null)
@@ -242,6 +240,13 @@ namespace DashoundCoachTravels.Controllers
             }
             ViewEditTripsViewModel model = new ViewEditTripsViewModel();
             model.TripInstance = trip;
+
+
+            //check for reservations. Cannot edit while there are any and trip is yet to end
+            var currTime = DateTime.Now;
+            if (NumberOfReservations > 0 && model.TripInstance.DateBack > currTime)
+                return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
+
 
             //get a list of all sub-locations that this trip has
             var list = new List<TripLocationsInstanceViewModels>();
@@ -302,7 +307,10 @@ namespace DashoundCoachTravels.Controllers
             }
             //check for reservations. Cannot edit while there are any. Placeholder 
             int NumberOfReservations = countReservavtionsMade((int)thisTripId);
-            if (NumberOfReservations > 0)
+
+            //check for reservations. Cannot edit while there are any and trip is yet to end
+            var currTime = DateTime.Now;
+            if (NumberOfReservations > 0 && model.TripInstance.DateBack > currTime)
                 return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
             try
@@ -341,11 +349,15 @@ namespace DashoundCoachTravels.Controllers
 
             //check for reservations. Cannot edit while there are any. Placeholder 
             int NumberOfReservations = countReservavtionsMade((int)thisTripId);
-            if (NumberOfReservations > 0)
-                return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
             Trip trip = dbcontext.Trips.Find(thisTripId); //get current trip
             if (trip == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            
+            //check for reservations. Cannot edit while there are any and trip is yet to end
+            var currTime = DateTime.Now;
+            if (NumberOfReservations > 0 && trip.DateBack > currTime)
+                return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
+
 
             return View(trip);
         }
@@ -360,12 +372,16 @@ namespace DashoundCoachTravels.Controllers
                     return RedirectToAction("AccessDenied", "Manage");
                 }
 
-            //check for reservations. Cannot edit while there are any. Placeholder 
+            
             int NumberOfReservations = countReservavtionsMade((int)thisTripId);
-            if (NumberOfReservations > 0)
-                return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
 
             Trip trip = dbcontext.Trips.Find(thisTripId); //get current trip
+
+            //check for reservations. Cannot edit while there are any and trip is yet to end
+            var currTime = DateTime.Now;
+            if (NumberOfReservations > 0 && trip.DateBack > currTime)
+                return RedirectToAction("Index", new { Message = ManageMessageId.CannotEditEntry });
+
             dbcontext.Trips.Remove(trip);
             dbcontext.SaveChanges();
 
