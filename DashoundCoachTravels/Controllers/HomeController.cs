@@ -27,15 +27,20 @@ namespace DashoundCoachTravels.Controllers
             // get 6 trips with closest departure date
             trip_list.OrderBy(item => item.DateDeparture);
 
-            int count = trip_list.Count() - 1; // np 12
-            int to = count - 6;
+            int count = trip_list.Count() - 1; // np 12 because index starts from 0 not 1
+            int to = count - 6; // 12 - 6 = 6
 
-            for (int i = count; i>to; i--) // im ordering from last because .OrderBy/.OrderByDescending returns the same list for some reason
+            //make sure there are trips in db
+            if (count >= 0) // there is at least 1 trip in db
             {
-                // check if there are less than 6 trips in list
-                if (trip_list.Count < i - 1) break;
-                model_list.Add(new ViewEditTripsViewModel { TripInstance = trip_list[i] });
+                for (int i = count; i > to; i--) // im ordering from last because .OrderBy/.OrderByDescending returns the same list for some reason
+                {
+                    // check if there are less than 6 trips in list
+                    if (trip_list.Count < i - 1) break;
+                    model_list.Add(new ViewEditTripsViewModel { TripInstance = trip_list[i] });
+                }
             }
+
 
             // model to return
             TripsViewModels model = new TripsViewModels();
