@@ -856,9 +856,11 @@ div#mainOffer {
         div#tlo a#header img {
             width: 40%;
         }
-
-    .nav > li {
+    div#accountNav ul > li {
         display: table-cell;
+    }
+    .nav > li {
+        display: block;
     }
 
     form#logoutForm.navbar-right {

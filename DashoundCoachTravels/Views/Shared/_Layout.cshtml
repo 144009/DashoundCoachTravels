@@ -15,7 +15,7 @@
     <script type="text/javascript" src="~/scripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="~/scripts/moment.min.js"></script>
     <script src="~/Scripts/moment-with-locales.min.js"></script>
-    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>--> 
     <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -60,17 +60,13 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    @if (UserRoleHelper.IsAdmin(User.Identity.GetUserId()))
-                    {
-                        <span class="icon-bar"></span>
-                    }
+                    <span class="icon-bar"></span>
                 </button>
             </div>
             <div class="navbar-collapse collapse">
