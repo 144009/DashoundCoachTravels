@@ -28,7 +28,7 @@ namespace DashoundCoachTravels.Controllers
             : message == ManageMessageId.Error ? "An error has occurred."
             : message == ManageMessageId.CannotEditEntry ? "There are reservations made for this trip. Cannot edit."
             : "";
-
+            // THIS ACTION WAS ANALYZED IN DETAIL in provided documentation (chapter 4)
 
             // tutorial used: https://github.com/TroyGoode/PagedList
             var pageIndex = (page ?? 1); // first page index. Must start at least at 1
@@ -208,6 +208,10 @@ namespace DashoundCoachTravels.Controllers
                 }
             if (ModelState.IsValid)
             {
+                // CoachNumberId is a required field in Trip Table BUT because when assigning a coach to a trip we need to be sure its not already 
+                // assigned to a different trip going on in  the time of creating this trip (checked by looking for trips in progress)
+                // there is no way to know at the time of this action what coaches can be used since we dont know when THIS trip will start-end. 
+                // we know that only after its created. so we assign a coachID which will never be created by DB and later assign a proprt value in edit action
                 model.CoachNumberId = -1;
 
                 dbcontext.Trips.Add(model);
@@ -280,6 +284,8 @@ namespace DashoundCoachTravels.Controllers
             var listOfCoaches = dbcontext.Coaches.ToList();
 
             var currDate = DateTime.Now;
+            // go through every trip in db that is in progress atm. A coach assigned to that trip will be removed from our list, so it cant be assigned 
+            //to this currently edited trip
             foreach (var coach in dbcontext.Coaches.ToList())
             {
                 foreach (var tripInstance in dbcontext.Trips.ToList())
@@ -291,6 +297,8 @@ namespace DashoundCoachTravels.Controllers
                             }
                 }
             }
+            ViewBag.DateDeparture = model.TripInstance.DateDeparture;
+            ViewBag.DateBack = model.TripInstance.DateBack;
 
             model.CoachVehicleIdList = new SelectList(listOfCoaches, "Id", "VehicleNumber");
 

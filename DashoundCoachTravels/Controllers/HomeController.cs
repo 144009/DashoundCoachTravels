@@ -24,10 +24,11 @@ namespace DashoundCoachTravels.Controllers
             var trip_list = dbcontext.Trips.ToList();
             var model_list = new List<ViewEditTripsViewModel>();
 
-            // get 6 trips with closest departure date
+            // get trip list with closest departure date. Doesnt actually work? When I try trip_list.OrderByDescending 
+            // it returns the same list as when done below. Dunno why. Solution is to take objects from last in list
             trip_list.OrderBy(item => item.DateDeparture);
 
-            int count = trip_list.Count() - 1; // np 12 because index starts from 0 not 1
+            int count = trip_list.Count() - 1; // eg 12 because trip list index starts from 0 not 1 in below for()
             int to = count - 6; // 12 - 6 = 6
 
             //make sure there are trips in db
@@ -36,7 +37,11 @@ namespace DashoundCoachTravels.Controllers
                 for (int i = count; i > to; i--) // im ordering from last because .OrderBy/.OrderByDescending returns the same list for some reason
                 {
                     // check if there are less than 6 trips in list
-                    if (trip_list.Count < i - 1) break;
+                    //if (trip_list.Count < i - 1) break; This would be correct if we ordered from first, not last
+                    // this would give a index out of bounds error if there are eg 4 trips (in 5th step we would be adding trip[-1]
+                    // we need to check if next index will be out of bounds (if there are no more trips in db)
+                    // 0 because we check if there are no trips left
+                    if (0 > i + 1) break;
                     model_list.Add(new ViewEditTripsViewModel { TripInstance = trip_list[i] });
                 }
             }

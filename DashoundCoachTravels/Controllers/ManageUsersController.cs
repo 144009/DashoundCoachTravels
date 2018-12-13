@@ -93,6 +93,7 @@ namespace DashoundCoachTravels.Controllers
             var userStore = new UserStore<ApplicationUser>(dbcontext); // access to roles using Identity Framework
             var userManager = new UserManager<ApplicationUser>(userStore);
 
+            // update db info with new data given by user in form View
             field.Id = CurrUser.Id;
             field.UserName = CurrUser.UserName;
             field.Email = CurrUser.Email;
@@ -152,10 +153,7 @@ namespace DashoundCoachTravels.Controllers
                 }
 
                 ApplicationUser CurrUser = dbcontext.Users.Find(model.Id);
-                if (CurrUser == null || model.Id == null)
-                {
-                    return HttpNotFound();
-                }
+                if (CurrUser == null || model.Id == null) return HttpNotFound();
 
                 // user cannot change his own role. Check if user currently editing has same id as the one being edited
                 if (model.Id == User.Identity.GetUserId())
@@ -164,10 +162,6 @@ namespace DashoundCoachTravels.Controllers
                 }
 
                 // declaration of needed variables to have the ability to change user roles : Identity Framework. Takes role types and users we will be later using from DB
-                var userBeingEdit = new ApplicationUser() { UserName = model.UserName };
-
-                var roleStore = new RoleStore<IdentityRole>(dbcontext);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
                 var userStore = new UserStore<ApplicationUser>(dbcontext);
                 var userManager = new UserManager<ApplicationUser>(userStore);
 

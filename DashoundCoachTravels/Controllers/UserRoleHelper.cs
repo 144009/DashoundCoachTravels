@@ -27,6 +27,7 @@ namespace DashoundCoachTravels.Helpers
         }
 
         // here the specific user role types to be checked using above method
+        // those functions are created for convenience as to not to use above function all the time
         public static bool IsAdmin(string userid)
         {
             return IsUserInRole(userid, "Administrator");

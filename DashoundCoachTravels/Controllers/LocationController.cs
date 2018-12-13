@@ -29,7 +29,7 @@ namespace DashoundCoachTravels.Controllers
                 : "";
 
             LocationsViewModels model = new LocationsViewModels();
-
+            // add every location item to the list, then save the list in model's List: Location. Return the model to view
             var list = new List<Location>();
             foreach (var item in dbcontext.Locations.ToList())
             {
@@ -69,19 +69,6 @@ namespace DashoundCoachTravels.Controllers
             }
             if (ModelState.IsValid)
             {
-
-                /*Coach coach = new Coach()
-                {
-                    Brand = model.Brand,
-                    VehModel = model.VehModel,
-                    Seats = model.Seats,
-                    DateAdded = model.DateAdded,
-                    VehicleNumber = model.VehicleNumber,
-                    VehScreenshot = model.VehScreenshot
-                };*/
-
-                //model.Id_Trip = 0; -> commented TripID FK line In DBentities\Coach.cs
-
                 dbcontext.Locations.Add(model);
                 dbcontext.SaveChanges();
 
@@ -115,9 +102,11 @@ namespace DashoundCoachTravels.Controllers
             {
                 try
                 {
+                    // first get info about currently edited coach, so it can be overwritten
                     var modelItem = dbcontext.Locations.Find(id);
                     if (modelItem == null) return HttpNotFound();
-
+                    
+                    // overwrite old data with new data provided from the view form
                     modelItem.Country = model.Country;
                     modelItem.Town = model.Town;
                     modelItem.Name = model.Name;
@@ -177,7 +166,7 @@ namespace DashoundCoachTravels.Controllers
 
         #region Helpers
 
-        public enum ManageMessageId // message pool that can be displayed after an operation
+        public enum ManageMessageId // message pool that can be displayed after an operation given as param for Index
         {
             EditDetailsSuccess,
             CreateEntrySuccess,

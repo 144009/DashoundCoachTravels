@@ -66,38 +66,36 @@
                                 {
                                     @Html.AntiForgeryToken()
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <p>
-                                    @Html.HiddenFor(model => model.Id)
-                                    @{
-                                        List<SelectListItem> listAllRoles = new List<SelectListItem>();
-                                        listAllRoles.Add(new SelectListItem
-                                        {
-                                            Text = "Administrator",
-                                            Value = "Administrator"
-                                        });
-                                        listAllRoles.Add(new SelectListItem
-                                        {
-                                            Text = "Employee",
-                                            Value = "Employee"
-                                        });
-                                        listAllRoles.Add(new SelectListItem
-                                        {
-                                            Text = "Customer",
-                                            Value = "Customer"
-                                        });
-                                    }
-                                    @Html.DropDownListFor(model => model.RoleType, listAllRoles)
-                                </p>
-
+                                    <p>
+                                        @Html.HiddenFor(model => model.Id)
+                                        @{
+                                            List<SelectListItem> listAllRoles = new List<SelectListItem>();
+                                            listAllRoles.Add(new SelectListItem
+                                            {
+                                                Text = "Administrator",
+                                                Value = "Administrator"
+                                            });
+                                            listAllRoles.Add(new SelectListItem
+                                            {
+                                                Text = "Employee",
+                                                Value = "Employee"
+                                            });
+                                            listAllRoles.Add(new SelectListItem
+                                            {
+                                                Text = "Customer",
+                                                Value = "Customer"
+                                            });
+                                        }
+                                        @Html.DropDownListFor(model => model.RoleType, listAllRoles)
+                                    </p>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Save" class="btn btn-default" />
+                                        </div>
+                                    </div>
                                 }
                             </dd>
                     </dl>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

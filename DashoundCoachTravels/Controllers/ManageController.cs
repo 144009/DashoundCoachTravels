@@ -73,6 +73,8 @@ namespace DashoundCoachTravels.Controllers
 
 
             // Account Info for View
+            // the ViewBag will contain a string with given info. This way it can be used in View by simply refering to 
+            // its name instead of doing eg. @Model.Name + " " + @Model.Surname in view each time we want to use it
             ApplicationUser CurrUser = dbcontext.Users.Find(userId);
             ViewBag.Name = CurrUser.Name + " " + CurrUser.Surname;
             ViewBag.CountryTown = CurrUser.Town + " in " + CurrUser.Country + ", " + CurrUser.ZIPCode;
@@ -104,7 +106,7 @@ namespace DashoundCoachTravels.Controllers
                 return HttpNotFound();
             }
 
-            // Account Info Details for View
+            // Account Info Details for View in form
             ViewBag.Name = CurrUser.Name;
             ViewBag.Surname = CurrUser.Surname;
             ViewBag.Country = CurrUser.Country;
@@ -139,7 +141,7 @@ namespace DashoundCoachTravels.Controllers
                 {
                     return HttpNotFound();
                 }
-                // update data
+                // update data entered by user in View
                 CurrUser.Name = field.Name;
                 CurrUser.Surname = field.Surname;
                 CurrUser.Country = field.Country;

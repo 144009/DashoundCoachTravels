@@ -30,6 +30,7 @@ namespace DashoundCoachTravels.Controllers
 
             CoachesViewModels model = new CoachesViewModels();
 
+            // add every coach item to the list, then save the list in model's List: Coach. Return the model to view
             var list = new List<Coach>();
             foreach (var item in dbcontext.Coaches.ToList())
             {
@@ -43,7 +44,7 @@ namespace DashoundCoachTravels.Controllers
         [Authorize]
         public ActionResult Details(int id)
         {
-            var model = dbcontext.Coaches.Find(id);
+            var model = dbcontext.Coaches.Find(id); // retrive info about current coach we want to see details of
             if (model == null) return HttpNotFound();
 
             return View(model);
@@ -71,7 +72,10 @@ namespace DashoundCoachTravels.Controllers
             if (ModelState.IsValid)
             {
 
-                /*Coach coach = new Coach()
+                /*Coach coach = new Coach() // this commented code was when Coach Entity had TripID FK in it, but it 
+                 * always required TripID in creation, so it was scrapped. A possible soluiton is to only
+                 * Create a coach from a Trip edit link containing its Id, but that would mean a coach would
+                 * only be created for a trip (bad idea)
                 {
                     Brand = model.Brand,
                     VehModel = model.VehModel,
@@ -99,8 +103,12 @@ namespace DashoundCoachTravels.Controllers
             {
                 return RedirectToAction("AccessDenied", "Manage");
             }
+            // get info about currently edited coach and return it to view
             Coach CurrVeh = dbcontext.Coaches.Find(id);
             if (CurrVeh == null) return HttpNotFound();
+
+            //for View
+            ViewBag.DateAdded = CurrVeh.DateAdded;
 
             return View(CurrVeh);
         }
@@ -117,9 +125,11 @@ namespace DashoundCoachTravels.Controllers
             {
                 try
                 {
+                    // first get info about currently edited coach, so it can be overwritten
                     var modelItem = dbcontext.Coaches.Find(id);
                     if (modelItem == null) return HttpNotFound();
 
+                    // overwrite old data with new data provided from the view form
                     modelItem.Brand = model.Brand;
                     modelItem.VehModel = model.VehModel;
                     modelItem.Seats = model.Seats;
@@ -182,7 +192,7 @@ namespace DashoundCoachTravels.Controllers
 
         #region Helpers
 
-        public enum ManageMessageId // message pool that can be displayed after an operation
+        public enum ManageMessageId // message pool that can be displayed after an operation given as param for Index
         {
             EditDetailsSuccess,
             CreateEntrySuccess,

@@ -38,7 +38,7 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
-                                        @Html.EditorFor(model => model.TripInstance.DateDeparture, new { htmlAttributes = new { @class = "form-control", @style = "width:240px;" } })
+                                        @Html.EditorFor(model => model.TripInstance.DateDeparture, new { htmlAttributes = new { @class = "form-control", @style = "width:240px;", Value = ViewBag.DateDeparture } })
                                     </div>
                                     @Html.ValidationMessageFor(model => model.TripInstance.DateDeparture, "", new { @class = "text-danger" })
                                 </div>
@@ -51,7 +51,7 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
-                                        @Html.EditorFor(model => model.TripInstance.DateBack, new { htmlAttributes = new { @class = "form-control", @style = "width:240px;" } })
+                                        @Html.EditorFor(model => model.TripInstance.DateBack, new { htmlAttributes = new { @class = "form-control", @style = "width:240px;", Value = ViewBag.DateBack } })
                                     </div>
                                     @Html.ValidationMessageFor(model => model.TripInstance.DateBack, "", new { @class = "text-danger" })
                                 </div>

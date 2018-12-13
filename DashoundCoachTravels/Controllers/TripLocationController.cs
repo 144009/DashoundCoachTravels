@@ -34,6 +34,8 @@ namespace DashoundCoachTravels.Controllers
             model.TripName = dbcontext.Trips.Find((int)thisTripId).Name;
 
             var list = new List<TripLocationsInstanceViewModels>();
+            // populate above list with all sublocations the current trip has assigned to it. Like in Trip/Index action we 
+            //need to check both ways if trip-location is assigned to each other
             foreach (var item in dbcontext.Trip_Locations.ToList())
             {
                 if(item.Id_Trip == thisTripId)
@@ -74,6 +76,7 @@ namespace DashoundCoachTravels.Controllers
 
             if(thisLocationId != null)
             {
+                // used to index the number of locations when showing list in Views. Assigned to model.Number
                 int i = 1;
                 foreach(var item in dbcontext.Trip_Locations.ToList())
                 {
